@@ -3,7 +3,6 @@ import folium
 from streamlit_folium import st_folium
 import os
 import base64
-from PIL import Image
 
 st.set_page_config(
     page_title="JDF Constructions",
@@ -50,96 +49,268 @@ html, body, .stApp {
 div[data-testid="column"] { padding: 0 !important; }
 div[data-testid="stVerticalBlock"] > div { padding: 0 !important; }
 
-/* ── GOLDEN NAV BUTTONS ── */
+/* GOLDEN BUTTONS */
 .stButton > button {
     background: #c9a227 !important;
     background-color: #c9a227 !important;
-    color: #ffffff !important;
+    color: #fff !important;
     border: none !important;
     border-radius: 8px !important;
     font-weight: 700 !important;
     letter-spacing: 1px !important;
     font-size: 0.72em !important;
-    padding: 10px 6px !important;
+    padding: 10px 4px !important;
     width: 100% !important;
-    box-shadow: 0 3px 10px rgba(201,162,39,0.3) !important;
     white-space: nowrap !important;
 }
 .stButton > button:hover {
     background: #a8841f !important;
     background-color: #a8841f !important;
-    color: #ffffff !important;
+    color: #fff !important;
     border: none !important;
 }
 .stButton > button:focus,
 .stButton > button:active {
     background: #c9a227 !important;
     background-color: #c9a227 !important;
-    color: #ffffff !important;
+    color: #fff !important;
     border: none !important;
     box-shadow: none !important;
+    outline: none !important;
 }
 
-/* Form */
+/* FORM */
 .stForm [data-testid="stFormSubmitButton"] > button {
-    background: linear-gradient(135deg,#c9a227,#e8c040) !important;
-    color:#fff !important; border:none !important;
-    border-radius:5px !important; width:100% !important;
+    background: #c9a227 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 5px !important;
+    width: 100% !important;
+    font-weight: 700 !important;
 }
-.stTextInput>div>div>input,
-.stTextArea>div>div>textarea {
-    background:#fff !important; border:1.5px solid #ddd !important;
-    color:#333 !important; border-radius:5px !important;
+.stTextInput > div > div > input,
+.stTextArea > div > div > textarea {
+    background: #fff !important;
+    border: 1.5px solid #ddd !important;
+    color: #333 !important;
+    border-radius: 5px !important;
 }
-.stSelectbox>div>div {
-    background:#fff !important; border:1.5px solid #ddd !important;
-    color:#333 !important; border-radius:5px !important;
+.stSelectbox > div > div {
+    background: #fff !important;
+    border: 1.5px solid #ddd !important;
+    border-radius: 5px !important;
 }
-.stTextInput label,.stTextArea label,.stSelectbox label {
-    color:#333 !important; font-size:0.85em !important; font-weight:600 !important;
+.stTextInput label, .stTextArea label, .stSelectbox label {
+    color: #333 !important;
+    font-size: 0.85em !important;
+    font-weight: 600 !important;
 }
 
-/* ── CSS GRID LAYOUTS ── */
-.grid-4 {
+/* ── LAYOUT CLASSES ── */
+.jdf-section {
+    width: 100%;
+    padding: 40px 0;
+}
+.jdf-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+.jdf-grid-4 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    width: 100%;
+    gap: 16px;
 }
-.grid-3 {
+.jdf-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    width: 100%;
+    gap: 16px;
 }
-.grid-2 {
+.jdf-grid-2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    width: 100%;
+    gap: 16px;
 }
-.grid-1-2 {
+.jdf-grid-about {
     display: grid;
-    grid-template-columns: 1fr 1.8fr;
-    gap: 20px;
-    width: 100%;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+    align-items: start;
 }
-.grid-2-1 {
+.jdf-grid-contact {
     display: grid;
     grid-template-columns: 1.6fr 1fr;
-    gap: 20px;
+    gap: 24px;
+    align-items: start;
+}
+.jdf-grid-skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+.hero-row {
+    display: flex;
     width: 100%;
 }
+.hero-logo {
+    width: 180px;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    border-right: 1px solid rgba(201,162,39,0.2);
+}
+.hero-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+.hero-owner {
+    width: 200px;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    border-left: 1px solid rgba(201,162,39,0.2);
+}
+.stats-row {
+    display: flex;
+    border-top: 1px solid rgba(201,162,39,0.2);
+    padding: 24px 40px;
+}
+.stat-box {
+    flex: 1;
+    text-align: center;
+    padding: 10px 12px;
+    border-right: 1px solid rgba(201,162,39,0.2);
+}
+.stat-box:last-child { border-right: none; }
 
-/* ── MOBILE ── */
-@media (max-width: 640px) {
-    .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
-    .grid-3 { grid-template-columns: repeat(1, 1fr) !important; }
-    .grid-2 { grid-template-columns: repeat(1, 1fr) !important; }
-    .grid-1-2 { grid-template-columns: 1fr !important; }
-    .grid-2-1 { grid-template-columns: 1fr !important; }
+.info-bar {
+    background: #9a7a10;
+    padding: 8px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78em;
+    color: #fff;
+    font-family: Montserrat, sans-serif;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.brand-bar {
+    background: #fff;
+    border-bottom: 3px solid #c9a227;
+    padding: 0 24px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.sec-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 0 8px;
+}
+.card-white {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0dcd0;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+    padding: 22px;
+}
+.feat-card {
+    background: #f9f7f2;
+    border-radius: 8px;
+    padding: 16px 18px;
+    border: 1px solid #e8e4d8;
+    border-left: 4px solid #c9a227;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.icon-circle {
+    width: 48px; height: 48px; min-width: 48px;
+    background: linear-gradient(135deg,#fff8e1,#ffeaa0);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4em;
+    border: 2px solid #f0d060;
+    margin: 0 auto 14px;
+}
+.icon-sq {
+    width: 42px; height: 42px; min-width: 42px;
+    background: linear-gradient(135deg,#fff8e1,#ffeaa0);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2em;
+}
+.gold-badge {
+    background: #fff8e1;
+    color: #9a7a10;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.7em;
+    font-weight: 700;
+    border: 1px solid #e8c840;
+    display: inline-block;
+}
+.step-num {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg,#c9a227,#e8c040);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2em; font-weight: 700; color: #fff;
+    margin: 0 auto 10px;
+}
+.skill-bar-bg {
+    background: #e8e4d8;
+    border-radius: 50px;
+    height: 6px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+.skill-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg,#c9a227,#f5d77e);
+    border-radius: 50px;
+}
+.loc-pill {
+    display: inline-block;
+    border: 1px solid rgba(201,162,39,0.5);
+    color: #c9a227;
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 0.72em;
+    font-weight: 600;
+    background: rgba(201,162,39,0.1);
+    margin: 3px;
+}
+
+/* ─── MOBILE BREAKPOINT ─── */
+@media screen and (max-width: 700px) {
+    .info-bar {
+        padding: 8px 14px !important;
+        font-size: 0.7em !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+    .brand-bar {
+        padding: 0 14px !important;
+        justify-content: center !important;
+    }
+    .brand-bar span { font-size: 1.1em !important; }
+
+    /* Hero */
     .hero-row { flex-direction: column !important; }
     .hero-logo { display: none !important; }
+    .hero-center { padding: 28px 14px !important; }
     .hero-owner {
         width: 100% !important;
         min-width: 100% !important;
@@ -147,26 +318,37 @@ div[data-testid="stVerticalBlock"] > div { padding: 0 !important; }
         border-top: 1px solid rgba(201,162,39,0.2) !important;
         padding: 16px !important;
     }
-    .hero-owner-card { width: 140px !important; margin: 0 auto !important; }
-    .stats-bar { flex-direction: column !important; }
-    .stat-item {
+
+    /* Stats */
+    .stats-row {
+        flex-wrap: wrap !important;
+        padding: 12px !important;
+    }
+    .stat-box {
+        flex: 1 1 50% !important;
         border-right: none !important;
         border-bottom: 1px solid rgba(201,162,39,0.2) !important;
-        padding: 14px 0 !important;
+        padding: 12px 8px !important;
     }
-    .info-bar { flex-direction: column !important; gap: 3px !important;
-        text-align: center !important; padding: 8px 12px !important; }
-    .nav-row { padding-right: 4px !important; }
-    .section-wrap { padding: 20px 12px !important; }
-    .footer-grid { flex-direction: column !important; gap: 16px !important; }
-    .cta-btns { flex-direction: column !important; align-items: center !important; }
-    .hero-center { padding: 24px 14px !important; }
-    .process-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* All grids → single column */
+    .jdf-grid-4,
+    .jdf-grid-3,
+    .jdf-grid-2,
+    .jdf-grid-about,
+    .jdf-grid-contact,
+    .jdf-grid-skills {
+        grid-template-columns: 1fr !important;
+    }
+
+    .jdf-inner { padding: 0 14px !important; }
+    .jdf-section { padding: 28px 0 !important; }
 }
 
-@media (max-width: 400px) {
-    .grid-4 { grid-template-columns: repeat(1, 1fr) !important; }
-    .process-grid { grid-template-columns: repeat(1, 1fr) !important; }
+@media screen and (min-width: 701px) and (max-width: 1024px) {
+    .jdf-grid-4 { grid-template-columns: repeat(2,1fr) !important; }
+    .jdf-grid-3 { grid-template-columns: repeat(2,1fr) !important; }
+    .jdf-grid-about { grid-template-columns: 1fr 1.5fr !important; }
 }
 
 ::-webkit-scrollbar { width: 5px; }
@@ -176,638 +358,453 @@ div[data-testid="stVerticalBlock"] > div { padding: 0 !important; }
 """, unsafe_allow_html=True)
 
 # ── INFO BAR
-st.markdown(
-    '<div class="info-bar" style="background:#9a7a10;padding:8px 40px;display:flex;'
-    'justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;'
-    'font-size:0.78em;color:#fff;font-family:Montserrat,sans-serif">'
-    '<span>📍 Near Dwarka Hotel, Habuwada Main Road, Karwar, Karnataka</span>'
-    '<span>✉ jdfconstructions@gmail.com &nbsp;'
-    '<a href="tel:+919019429427" style="color:#fff;text-decoration:none">'
-    '📞 +91 90194 29427</a></span></div>',
-    unsafe_allow_html=True
-)
+st.markdown("""
+<div class="info-bar">
+    <span>📍 Near Dwarka Hotel, Habuwada Main Road, Karwar, Karnataka</span>
+    <span>✉ jdfconstructions@gmail.com &nbsp;
+    <a href="tel:+919019429427" style="color:#fff;text-decoration:none">
+    📞 +91 90194 29427</a></span>
+</div>
+""", unsafe_allow_html=True)
 
-# ── NAVBAR
-st.markdown(
-    '<div style="background:#fff;border-bottom:3px solid #c9a227;'
-    'padding:0 24px;min-height:60px;display:flex;align-items:center;'
-    'box-shadow:0 2px 10px rgba(0,0,0,0.06)">'
-    '<span style="font-family:Cormorant Garamond,serif;font-size:1.4em;'
-    'font-weight:700;color:#b8960c;letter-spacing:2px">🏗️ JDF CONSTRUCTIONS</span>'
-    '</div>',
-    unsafe_allow_html=True
-)
+# ── BRAND BAR
+st.markdown("""
+<div class="brand-bar">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:1.4em;
+    font-weight:700;color:#b8960c;letter-spacing:2px">🏗️ JDF CONSTRUCTIONS</span>
+</div>
+""", unsafe_allow_html=True)
 
-# ── NAV BUTTONS (Streamlit columns — kept for interactivity)
-nav_cols = st.columns([0.4,1,1,1,1,1,0.4])
-with nav_cols[1]:
-    if st.button("HOME", key="n1"): go("Home")
-with nav_cols[2]:
-    if st.button("SERVICES", key="n2"): go("Services")
-with nav_cols[3]:
+# ── NAV BUTTONS (must stay as st.columns for Python click events)
+nc = st.columns([0.3,1,1,1,1,1,0.3])
+with nc[1]:
+    if st.button("HOME",      key="n1"): go("Home")
+with nc[2]:
+    if st.button("SERVICES",  key="n2"): go("Services")
+with nc[3]:
     if st.button("LOCATIONS", key="n3"): go("Locations")
-with nav_cols[4]:
-    if st.button("ABOUT US", key="n4"): go("About Us")
-with nav_cols[5]:
-    if st.button("CONTACT", key="n5"): go("Contact Us")
+with nc[4]:
+    if st.button("ABOUT US",  key="n4"): go("About Us")
+with nc[5]:
+    if st.button("CONTACT",   key="n5"): go("Contact Us")
 
-st.markdown('<div style="margin-top:-8px"></div>', unsafe_allow_html=True)
+st.markdown('<div style="margin-top:-10px"></div>', unsafe_allow_html=True)
 
-# ── HELPERS
-def sec_header(overline, title, desc=""):
-    desc_html = (
-        f'<p style="color:#777;font-size:0.92em;max-width:520px;'
-        f'margin:0 auto;line-height:1.75;padding:0 8px">{desc}</p>'
-    ) if desc else ""
-    st.markdown(
-        f'<div style="text-align:center;margin-bottom:20px;padding:0 8px">'
-        f'<span style="font-family:Montserrat,sans-serif;font-size:0.7em;'
-        f'letter-spacing:4px;text-transform:uppercase;'
-        f'color:#c9a227;font-weight:700;display:block;margin-bottom:6px">{overline}</span>'
-        f'<div style="font-family:Cormorant Garamond,serif;'
-        f'font-size:clamp(1.7em,4vw,2.5em);'
-        f'font-weight:700;color:#1a1a1a;margin:0 0 10px;line-height:1.15">{title}</div>'
-        f'{desc_html}'
-        f'<div style="width:52px;height:2px;'
-        f'background:linear-gradient(90deg,#c9a227,#f5d77e);'
-        f'margin:12px auto;border-radius:2px"></div></div>',
-        unsafe_allow_html=True
-    )
+# ── SECTION HEADER helper
+def sec_header(over, title, desc=""):
+    d = f'<p style="color:#777;font-size:0.91em;max-width:540px;margin:8px auto 0;line-height:1.75">{desc}</p>' if desc else ""
+    st.markdown(f"""
+    <div class="sec-header">
+        <span style="font-family:Montserrat,sans-serif;font-size:0.68em;
+            letter-spacing:4px;text-transform:uppercase;color:#c9a227;
+            font-weight:700;display:block;margin-bottom:6px">{over}</span>
+        <div style="font-family:'Cormorant Garamond',serif;
+            font-size:clamp(1.6em,4vw,2.4em);font-weight:700;
+            color:#1a1a1a;line-height:1.15">{title}</div>
+        {d}
+        <div style="width:52px;height:2px;
+            background:linear-gradient(90deg,#c9a227,#f5d77e);
+            margin:12px auto 0;border-radius:2px"></div>
+    </div>""", unsafe_allow_html=True)
 
-def wrap_open(bg="#f2f0eb", pad="40px 0"):
-    st.markdown(
-        f'<div style="background:{bg};padding:{pad};width:100%">',
-        unsafe_allow_html=True
-    )
-
-def wrap_close():
-    st.markdown('</div>', unsafe_allow_html=True)
-
-def inner_open():
-    st.markdown(
-        '<div class="section-wrap" style="max-width:1200px;margin:0 auto;padding:0 30px">',
-        unsafe_allow_html=True
-    )
-
-def inner_close():
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# ═══════════════════════════════════════════════
-# HOME PAGE
-# ═══════════════════════════════════════════════
+# ═══════════════════════════════════════
+# HOME
+# ═══════════════════════════════════════
 if pg == "Home":
     logo_b64  = img_to_b64("jdf_logo.png")
     owner_b64 = img_to_b64("jason_photo.jpg")
 
-    logo_html = (
-        f'<img src="data:image/png;base64,{logo_b64}" '
-        f'style="width:clamp(80px,10vw,150px);border-radius:8px;'
-        f'box-shadow:0 4px 20px rgba(0,0,0,0.5)">'
-    ) if logo_b64 else '<span style="font-size:3em">🏗️</span>'
+    if logo_b64:
+        logo_tag = '<img src="data:image/png;base64,' + logo_b64 + '" style="width:clamp(70px,10vw,150px);border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.5)">'
+    else:
+        logo_tag = '<span style="font-size:3em">&#127959;</span>'
 
-    owner_img = (
-        f'<img src="data:image/jpeg;base64,{owner_b64}" '
-        f'style="width:100%;height:180px;object-fit:cover;'
-        f'object-position:top center;display:block;border-radius:6px 6px 0 0">'
-    ) if owner_b64 else (
-        '<div style="height:180px;background:#2d2000;border-radius:6px 6px 0 0;'
-        'display:flex;align-items:center;justify-content:center;font-size:3em">👤</div>'
-    )
+    if owner_b64:
+        owner_tag = '<img src="data:image/jpeg;base64,' + owner_b64 + '" style="width:100%;height:180px;object-fit:cover;object-position:top center;display:block;border-radius:6px 6px 0 0">'
+    else:
+        owner_tag = '<div style="height:180px;background:#2d2000;border-radius:6px 6px 0 0;display:flex;align-items:center;justify-content:center;font-size:3em">&#128100;</div>'
 
-    # ── HERO
-    st.markdown(
-        '<div style="background:linear-gradient(135deg,#1c1400,#2d2000,#1a1200);'
-        'border-bottom:4px solid #c9a227;width:100%">'
-
-        # Top row
-        '<div class="hero-row" style="display:flex;width:100%;flex-wrap:wrap">'
-
-        # Logo
-        f'<div class="hero-logo" style="width:180px;min-width:180px;display:flex;'
-        f'align-items:center;justify-content:center;padding:24px;'
-        f'border-right:1px solid rgba(201,162,39,0.2)">{logo_html}</div>'
-
-        # Center
-        '<div class="hero-center" style="flex:1;min-width:240px;display:flex;'
-        'align-items:center;justify-content:center;text-align:center;padding:40px 20px">'
+    full_hero = (
+        '<div style="background:linear-gradient(135deg,#1c1400,#2d2000,#1a1200);border-bottom:4px solid #c9a227;width:100%">'
+        '<div class="hero-row">'
+        '<div class="hero-logo">' + logo_tag + '</div>'
+        '<div class="hero-center"><div>'
+        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.45em,1.2vw,0.65em);letter-spacing:4px;text-transform:uppercase;color:rgba(201,162,39,0.65);font-weight:600;margin-bottom:12px">KARNATAKA\'S PREMIER CONSTRUCTION COMPANY</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(2.8em,8vw,5.5em);font-weight:700;color:#fff;line-height:0.9;letter-spacing:3px">JDF</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1em,3vw,1.8em);font-weight:600;color:#c9a227;letter-spacing:6px;text-transform:uppercase;margin:10px 0 12px">CONSTRUCTIONS</div>'
+        '<div style="width:50px;height:2px;background:linear-gradient(90deg,#c9a227,#f5d77e);margin:0 auto 14px"></div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.9em,2vw,1.25em);color:#d4c898;font-style:italic;margin-bottom:20px">"Your dream project starts here."</div>'
         '<div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.5em,1.2vw,0.65em);'
-        'letter-spacing:4px;text-transform:uppercase;color:rgba(201,162,39,0.65);'
-        'font-weight:600;margin-bottom:12px">KARNATAKA\'S PREMIER CONSTRUCTION COMPANY</div>'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(2.8em,7vw,5.5em);'
-        'font-weight:700;color:#fff;line-height:0.9;letter-spacing:3px">JDF</div>'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1em,2.5vw,1.8em);'
-        'font-weight:600;color:#c9a227;letter-spacing:6px;text-transform:uppercase;'
-        'margin:10px 0 12px">CONSTRUCTIONS</div>'
-        '<div style="width:50px;height:2px;background:linear-gradient(90deg,#c9a227,#f5d77e);'
-        'margin:0 auto 14px"></div>'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.9em,2vw,1.25em);'
-        'color:#d4c898;font-style:italic;margin-bottom:20px">"Your dream project starts here."</div>'
-        '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px">'
-        '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;padding:5px 12px;'
-        'border-radius:30px;font-size:0.72em;font-weight:600;'
-        'background:rgba(201,162,39,0.1)">📍 Karwar</span>'
-        '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;padding:5px 12px;'
-        'border-radius:30px;font-size:0.72em;font-weight:600;'
-        'background:rgba(201,162,39,0.1)">📍 Ankola</span>'
-        '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;padding:5px 12px;'
-        'border-radius:30px;font-size:0.72em;font-weight:600;'
-        'background:rgba(201,162,39,0.1)">📍 Honnawar</span>'
-        '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;padding:5px 12px;'
-        'border-radius:30px;font-size:0.72em;font-weight:600;'
-        'background:rgba(201,162,39,0.1)">📍 Mangalore</span>'
+        '<span class="loc-pill">&#128205; Karwar</span>'
+        '<span class="loc-pill">&#128205; Ankola</span>'
+        '<span class="loc-pill">&#128205; Honnawar</span>'
+        '<span class="loc-pill">&#128205; Mangalore</span>'
+        '</div>'
+        '</div></div>'
+        '<div class="hero-owner"><div style="width:160px">'
+        + owner_tag +
+        '<div style="background:#fff;border-radius:0 0 8px 8px;border-top:3px solid #c9a227;padding:12px;text-align:center">'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:1em;font-weight:700;color:#1a1a1a">Jason Fernandes</div>'
+        '<div style="font-family:Montserrat,sans-serif;font-size:0.55em;letter-spacing:2px;color:#c9a227;text-transform:uppercase;font-weight:700;margin:3px 0">Founder &amp; Owner</div>'
+        '<div style="font-size:0.73em;color:#444;font-weight:600">&#128222; 90194 29427</div>'
         '</div></div></div>'
-
-        # Owner
-        f'<div class="hero-owner" style="width:200px;min-width:200px;display:flex;'
-        f'align-items:center;justify-content:center;padding:24px;'
-        f'border-left:1px solid rgba(201,162,39,0.2)">'
-        f'<div class="hero-owner-card" style="width:160px">'
-        f'{owner_img}'
-        f'<div style="background:#fff;border-radius:0 0 8px 8px;border-top:3px solid #c9a227;'
-        f'padding:12px;text-align:center">'
-        f'<div style="font-family:Cormorant Garamond,serif;font-size:1em;'
-        f'font-weight:700;color:#1a1a1a">Jason Fernandes</div>'
-        f'<div style="font-family:Montserrat,sans-serif;font-size:0.56em;'
-        f'letter-spacing:2px;color:#c9a227;text-transform:uppercase;'
-        f'font-weight:700;margin:4px 0">Founder &amp; Owner</div>'
-        f'<div style="font-family:Montserrat,sans-serif;font-size:0.73em;'
-        f'color:#444;font-weight:600">📞 90194 29427</div>'
-        f'</div></div></div>'
-        '</div>'  # end hero-row
-
-        # Stats bar — pure HTML grid
-        '<div class="stats-bar" style="border-top:1px solid rgba(201,162,39,0.2);'
-        'display:flex;flex-wrap:wrap;justify-content:space-around;'
-        'padding:24px 20px;gap:0">'
-
-        '<div class="stat-item" style="flex:1;min-width:120px;text-align:center;'
-        'border-right:1px solid rgba(201,162,39,0.2);padding:10px 12px">'
-        '<div style="font-size:1.5em;margin-bottom:4px">🏗️</div>'
-        '<div style="font-family:Cormorant Garamond,serif;'
-        'font-size:clamp(1.6em,3.5vw,2.8em);font-weight:700;color:#c9a227">500+</div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.5em,1.2vw,0.6em);'
-        'text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">'
-        'Projects Completed</div></div>'
-
-        '<div class="stat-item" style="flex:1;min-width:120px;text-align:center;'
-        'border-right:1px solid rgba(201,162,39,0.2);padding:10px 12px">'
-        '<div style="font-size:1.5em;margin-bottom:4px">📍</div>'
-        '<div style="font-family:Cormorant Garamond,serif;'
-        'font-size:clamp(1.6em,3.5vw,2.8em);font-weight:700;color:#c9a227">4</div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.5em,1.2vw,0.6em);'
-        'text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">'
-        'Cities Served</div></div>'
-
-        '<div class="stat-item" style="flex:1;min-width:120px;text-align:center;'
-        'border-right:1px solid rgba(201,162,39,0.2);padding:10px 12px">'
-        '<div style="font-size:1.5em;margin-bottom:4px">🏅</div>'
-        '<div style="font-family:Cormorant Garamond,serif;'
-        'font-size:clamp(1.6em,3.5vw,2.8em);font-weight:700;color:#c9a227">5+</div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.5em,1.2vw,0.6em);'
-        'text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">'
-        'Years of Excellence</div></div>'
-
-        '<div class="stat-item" style="flex:1;min-width:120px;text-align:center;'
-        'padding:10px 12px">'
-        '<div style="font-size:1.5em;margin-bottom:4px">😊</div>'
-        '<div style="font-family:Cormorant Garamond,serif;'
-        'font-size:clamp(1.6em,3.5vw,2.8em);font-weight:700;color:#c9a227">1000+</div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.5em,1.2vw,0.6em);'
-        'text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">'
-        'Happy Clients</div></div>'
-
-        '</div>'  # end stats
-        '</div>', # end hero outer
-        unsafe_allow_html=True
+        '</div>'
+        '<div class="stats-row">'
+        '<div class="stat-box">'
+        '<div style="font-size:1.4em;margin-bottom:4px">&#127959;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.5em,4vw,2.6em);font-weight:700;color:#c9a227">500+</div>'
+        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.48em,1.2vw,0.58em);text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">Projects Completed</div>'
+        '</div>'
+        '<div class="stat-box">'
+        '<div style="font-size:1.4em;margin-bottom:4px">&#128205;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.5em,4vw,2.6em);font-weight:700;color:#c9a227">4</div>'
+        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.48em,1.2vw,0.58em);text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">Cities Served</div>'
+        '</div>'
+        '<div class="stat-box">'
+        '<div style="font-size:1.4em;margin-bottom:4px">&#127885;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.5em,4vw,2.6em);font-weight:700;color:#c9a227">15+</div>'
+        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.48em,1.2vw,0.58em);text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">Years of Excellence</div>'
+        '</div>'
+        '<div class="stat-box">'
+        '<div style="font-size:1.4em;margin-bottom:4px">&#128522;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.5em,4vw,2.6em);font-weight:700;color:#c9a227">1000+</div>'
+        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.48em,1.2vw,0.58em);text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">Happy Clients</div>'
+        '</div>'
+        '</div>'
+        '</div>'
     )
+    st.markdown(full_hero, unsafe_allow_html=True)
 
-    # ── SERVICES (pure HTML grid)
-    wrap_open("#f2f0eb")
-    inner_open()
-    sec_header("What We Build", "Our Core Services",
+    # ── SERVICES
+    st.markdown("""
+    <div class="jdf-section" style="background:#f2f0eb">
+    <div class="jdf-inner">
+    """, unsafe_allow_html=True)
+    sec_header("What We Build","Our Core Services",
                "From luxury residences to large-scale infrastructure.")
     st.markdown("""
-    <div class="grid-4">
-      <div style="background:#fff;border-radius:8px;padding:24px 16px;
-        box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid #e0dcd0;text-align:center">
-        <div style="width:54px;height:54px;background:linear-gradient(135deg,#fff8e1,#ffeaa0);
-          border-radius:50%;display:flex;align-items:center;justify-content:center;
-          font-size:1.5em;margin:0 auto 14px;border:2px solid #f0d060">🏠</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.15em;font-weight:700;
-          color:#1a1a1a;margin-bottom:8px">Residential</div>
+    <div class="jdf-grid-4" style="margin-top:8px">
+      <div class="card-white" style="text-align:center">
+        <div class="icon-circle">🏠</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.15em;
+            font-weight:700;color:#1a1a1a;margin-bottom:8px">Residential</div>
         <div style="color:#777;font-size:0.83em;line-height:1.7">
-          Custom homes, villas and apartments built to your vision.</div>
+            Custom homes, villas and apartments built to your vision.</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:24px 16px;
-        box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid #e0dcd0;text-align:center">
-        <div style="width:54px;height:54px;background:linear-gradient(135deg,#fff8e1,#ffeaa0);
-          border-radius:50%;display:flex;align-items:center;justify-content:center;
-          font-size:1.5em;margin:0 auto 14px;border:2px solid #f0d060">🏢</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.15em;font-weight:700;
-          color:#1a1a1a;margin-bottom:8px">Commercial</div>
+      <div class="card-white" style="text-align:center">
+        <div class="icon-circle">🏢</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.15em;
+            font-weight:700;color:#1a1a1a;margin-bottom:8px">Commercial</div>
         <div style="color:#777;font-size:0.83em;line-height:1.7">
-          Modern offices, retail spaces and commercial complexes.</div>
+            Modern offices, retail spaces and commercial complexes.</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:24px 16px;
-        box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid #e0dcd0;text-align:center">
-        <div style="width:54px;height:54px;background:linear-gradient(135deg,#fff8e1,#ffeaa0);
-          border-radius:50%;display:flex;align-items:center;justify-content:center;
-          font-size:1.5em;margin:0 auto 14px;border:2px solid #f0d060">🛣️</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.15em;font-weight:700;
-          color:#1a1a1a;margin-bottom:8px">Infrastructure</div>
+      <div class="card-white" style="text-align:center">
+        <div class="icon-circle">🛣️</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.15em;
+            font-weight:700;color:#1a1a1a;margin-bottom:8px">Infrastructure</div>
         <div style="color:#777;font-size:0.83em;line-height:1.7">
-          Roads, bridges, drainage and large-scale civil works.</div>
+            Roads, bridges, drainage and large-scale civil works.</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:24px 16px;
-        box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid #e0dcd0;text-align:center">
-        <div style="width:54px;height:54px;background:linear-gradient(135deg,#fff8e1,#ffeaa0);
-          border-radius:50%;display:flex;align-items:center;justify-content:center;
-          font-size:1.5em;margin:0 auto 14px;border:2px solid #f0d060">🔧</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.15em;font-weight:700;
-          color:#1a1a1a;margin-bottom:8px">Renovation</div>
+      <div class="card-white" style="text-align:center">
+        <div class="icon-circle">🔧</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.15em;
+            font-weight:700;color:#1a1a1a;margin-bottom:8px">Renovation</div>
         <div style="color:#777;font-size:0.83em;line-height:1.7">
-          Expert remodelling that transforms existing spaces.</div>
+            Expert remodelling that transforms existing spaces.</div>
       </div>
     </div>
+    </div></div>
     """, unsafe_allow_html=True)
-    inner_close()
-    wrap_close()
 
     # ── WHY US
-    wrap_open("#ffffff")
-    inner_open()
-    sec_header("Why JDF", "The JDF Difference",
-               "Craftsmanship, technology and transparency.")
     st.markdown("""
-    <div class="grid-2">
-      <div style="background:#f9f7f2;border-radius:8px;padding:16px 18px;
-        border:1px solid #e8e4d8;border-left:4px solid #c9a227;
-        display:flex;align-items:flex-start;gap:12px">
-        <div style="width:42px;height:42px;min-width:42px;
-          background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:8px;
-          display:flex;align-items:center;justify-content:center;font-size:1.2em">🏅</div>
+    <div class="jdf-section" style="background:#fff">
+    <div class="jdf-inner">
+    """, unsafe_allow_html=True)
+    sec_header("Why JDF","The JDF Difference","Craftsmanship, technology and transparency.")
+    st.markdown("""
+    <div class="jdf-grid-2" style="margin-top:8px">
+      <div class="feat-card">
+        <div st.markdownclass="icon-sq">🏅</div>
         <div>
           <div style="font-weight:700;color:#1a1a1a;font-size:0.88em;margin-bottom:3px">
-            Premium Quality</div>
+              Premium Quality</div>
           <div style="color:#888;font-size:0.8em;line-height:1.6">
-            Top-grade certified materials with strict QC at every stage.</div>
+              Top-grade certified materials with strict QC at every stage.</div>
         </div>
       </div>
-      <div style="background:#f9f7f2;border-radius:8px;padding:16px 18px;
-        border:1px solid #e8e4d8;border-left:4px solid #c9a227;
-        display:flex;align-items:flex-start;gap:12px">
-        <div style="width:42px;height:42px;min-width:42px;
-          background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:8px;
-          display:flex;align-items:center;justify-content:center;font-size:1.2em">⏰</div>
+      <div class="feat-card">
+        <div class="icon-sq">⏰</div>
         <div>
           <div style="font-weight:700;color:#1a1a1a;font-size:0.88em;margin-bottom:3px">
-            On-Time Delivery</div>
+              On-Time Delivery</div>
           <div style="color:#888;font-size:0.8em;line-height:1.6">
-            We honour every deadline with systematic project management.</div>
+              We honour every deadline with systematic project management.</div>
         </div>
       </div>
-      <div style="background:#f9f7f2;border-radius:8px;padding:16px 18px;
-        border:1px solid #e8e4d8;border-left:4px solid #c9a227;
-        display:flex;align-items:flex-start;gap:12px">
-        <div style="width:42px;height:42px;min-width:42px;
-          background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:8px;
-          display:flex;align-items:center;justify-content:center;font-size:1.2em">💰</div>
+      <div class="feat-card">
+        <div class="icon-sq">💰</div>
         <div>
           <div style="font-weight:700;color:#1a1a1a;font-size:0.88em;margin-bottom:3px">
-            Transparent Pricing</div>
+              Transparent Pricing</div>
           <div style="color:#888;font-size:0.8em;line-height:1.6">
-            Honest quotations — what we quote is exactly what you pay.</div>
+              Honest quotations — what we quote is exactly what you pay.</div>
         </div>
       </div>
-      <div style="background:#f9f7f2;border-radius:8px;padding:16px 18px;
-        border:1px solid #e8e4d8;border-left:4px solid #c9a227;
-        display:flex;align-items:flex-start;gap:12px">
-        <div style="width:42px;height:42px;min-width:42px;
-          background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:8px;
-          display:flex;align-items:center;justify-content:center;font-size:1.2em">👷</div>
+      <div class="feat-card">
+        <div class="icon-sq">👷</div>
         <div>
           <div style="font-weight:700;color:#1a1a1a;font-size:0.88em;margin-bottom:3px">
-            Expert Team</div>
+              Expert Team</div>
           <div style="color:#888;font-size:0.8em;line-height:1.6">
-            Certified engineers, architects and experienced workers.</div>
+              Certified engineers, architects and experienced workers.</div>
         </div>
       </div>
-      <div style="background:#f9f7f2;border-radius:8px;padding:16px 18px;
-        border:1px solid #e8e4d8;border-left:4px solid #c9a227;
-        display:flex;align-items:flex-start;gap:12px">
-        <div style="width:42px;height:42px;min-width:42px;
-          background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:8px;
-          display:flex;align-items:center;justify-content:center;font-size:1.2em">🌱</div>
+      <div class="feat-card">
+        <div class="icon-sq">🌱</div>
         <div>
           <div style="font-weight:700;color:#1a1a1a;font-size:0.88em;margin-bottom:3px">
-            Eco-Friendly</div>
+              Eco-Friendly</div>
           <div style="color:#888;font-size:0.8em;line-height:1.6">
-            Sustainable methods protecting Karnataka's coast.</div>
+              Sustainable methods protecting Karnataka's beautiful coast.</div>
         </div>
       </div>
-      <div style="background:#f9f7f2;border-radius:8px;padding:16px 18px;
-        border:1px solid #e8e4d8;border-left:4px solid #c9a227;
-        display:flex;align-items:flex-start;gap:12px">
-        <div style="width:42px;height:42px;min-width:42px;
-          background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:8px;
-          display:flex;align-items:center;justify-content:center;font-size:1.2em">📞</div>
+      <div class="feat-card">
+        <div class="icon-sq">📞</div>
         <div>
           <div style="font-weight:700;color:#1a1a1a;font-size:0.88em;margin-bottom:3px">
-            24/7 Support</div>
+              24/7 Support</div>
           <div style="color:#888;font-size:0.8em;line-height:1.6">
-            Always available from first consultation to final handover.</div>
+              Always available from first consultation to final handover.</div>
         </div>
       </div>
     </div>
+    </div></div>
     """, unsafe_allow_html=True)
-    inner_close()
-    wrap_close()
 
     # ── TESTIMONIALS
-    wrap_open("#f2f0eb")
-    inner_open()
-    sec_header("Client Stories", "What Our Clients Say")
     st.markdown("""
-    <div class="grid-3">
-      <div style="background:#fff;border-radius:8px;padding:24px 20px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0;
-        border-top:3px solid #c9a227">
+    <div class="jdf-section" style="background:#f2f0eb">
+    <div class="jdf-inner">
+    """, unsafe_allow_html=True)
+    sec_header("Client Stories","What Our Clients Say")
+    st.markdown("""
+    <div class="jdf-grid-3" style="margin-top:8px">
+      <div class="card-white" style="border-top:3px solid #c9a227">
         <div style="font-family:Georgia,serif;font-size:2.5em;
-          color:rgba(201,162,39,0.25);line-height:1;margin-bottom:6px">"</div>
+            color:rgba(201,162,39,0.25);line-height:1;margin-bottom:6px">"</div>
         <div style="color:#555;font-style:italic;font-size:0.87em;
-          line-height:1.8;margin-bottom:14px">
+            line-height:1.8;margin-bottom:14px">
           JDF built our dream home in Karwar with incredible precision.
-          Professional, timely and beyond every expectation we had set.</div>
+          Professional, timely and beyond every expectation.</div>
         <div style="color:#c9a227;margin-bottom:6px">⭐⭐⭐⭐⭐</div>
         <div style="font-weight:700;font-size:0.84em;color:#1a1a1a">Ramesh Naik</div>
         <div style="color:#c9a227;font-size:0.73em;margin-top:2px">📍 Karwar</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:24px 20px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0;
-        border-top:3px solid #c9a227">
+      <div class="card-white" style="border-top:3px solid #c9a227">
         <div style="font-family:Georgia,serif;font-size:2.5em;
-          color:rgba(201,162,39,0.25);line-height:1;margin-bottom:6px">"</div>
+            color:rgba(201,162,39,0.25);line-height:1;margin-bottom:6px">"</div>
         <div style="color:#555;font-style:italic;font-size:0.87em;
-          line-height:1.8;margin-bottom:14px">
+            line-height:1.8;margin-bottom:14px">
           Outstanding commercial project in Mangalore — on schedule,
           within budget and genuinely impressive quality.</div>
         <div style="color:#c9a227;margin-bottom:6px">⭐⭐⭐⭐⭐</div>
         <div style="font-weight:700;font-size:0.84em;color:#1a1a1a">Priya Shetty</div>
         <div style="color:#c9a227;font-size:0.73em;margin-top:2px">📍 Mangalore</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:24px 20px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0;
-        border-top:3px solid #c9a227">
+      <div class="card-white" style="border-top:3px solid #c9a227">
         <div style="font-family:Georgia,serif;font-size:2.5em;
-          color:rgba(201,162,39,0.25);line-height:1;margin-bottom:6px">"</div>
+            color:rgba(201,162,39,0.25);line-height:1;margin-bottom:6px">"</div>
         <div style="color:#555;font-style:italic;font-size:0.87em;
-          line-height:1.8;margin-bottom:14px">
+            line-height:1.8;margin-bottom:14px">
           JDF transformed our Honnawar building into a modern masterpiece.
-          Best construction company on the Karnataka coast.</div>
+          Best company on the Karnataka coast.</div>
         <div style="color:#c9a227;margin-bottom:6px">⭐⭐⭐⭐⭐</div>
         <div style="font-weight:700;font-size:0.84em;color:#1a1a1a">Suresh Hegde</div>
         <div style="color:#c9a227;font-size:0.73em;margin-top:2px">📍 Honnawar</div>
       </div>
     </div>
+    </div></div>
     """, unsafe_allow_html=True)
-    inner_close()
-    wrap_close()
 
     # ── CTA
-    wrap_open("#f2f0eb", "0 0 50px")
-    inner_open()
     st.markdown("""
-    <div style="background:linear-gradient(135deg,#c9a227,#e8c040,#c9a227);
-      padding:50px 30px;text-align:center;border-radius:10px;
-      box-shadow:0 12px 48px rgba(201,162,39,0.35)">
-      <div style="font-family:Cormorant Garamond,serif;
-        font-size:clamp(1.5em,4vw,2.5em);color:#fff;font-weight:700;margin-bottom:12px">
-        Ready to Build Your Dream Project?</div>
-      <p style="color:rgba(255,255,255,0.88);font-size:0.95em;
-        margin-bottom:24px;padding:0 10px">
-        FREE consultation from Karnataka's most trusted experts.</p>
-      <div class="cta-btns" style="display:flex;flex-wrap:wrap;
-        justify-content:center;gap:12px">
-        <a href="tel:+919019429427"
-          style="background:#fff;color:#b8960c;padding:13px 32px;border-radius:5px;
-          font-size:0.82em;font-weight:800;text-decoration:none;
-          letter-spacing:1px;text-transform:uppercase">
-          📞 Call: 90194 29427</a>
-        <a href="https://wa.me/919019429427" target="_blank"
-          style="background:#1a1200;color:#c9a227;padding:13px 32px;border-radius:5px;
-          font-size:0.82em;font-weight:800;text-decoration:none;
-          letter-spacing:1px;text-transform:uppercase">
-          💬 WhatsApp Us</a>
+    <div class="jdf-section" style="background:#f2f0eb;padding-top:0">
+    <div class="jdf-inner">
+      <div style="background:linear-gradient(135deg,#c9a227,#e8c040,#c9a227);
+          padding:50px 30px;text-align:center;border-radius:10px;
+          box-shadow:0 12px 48px rgba(201,162,39,0.35)">
+        <div style="font-family:'Cormorant Garamond',serif;
+            font-size:clamp(1.5em,4vw,2.4em);color:#fff;
+            font-weight:700;margin-bottom:12px">
+          Ready to Build Your Dream Project?</div>
+        <p style="color:rgba(255,255,255,0.88);font-size:0.94em;
+            margin-bottom:24px;padding:0 10px">
+          FREE consultation from Karnataka's most trusted experts.</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
+          <a href="tel:+919019429427"
+              style="background:#fff;color:#b8960c;padding:13px 32px;
+              border-radius:5px;font-size:0.82em;font-weight:800;
+              text-decoration:none;letter-spacing:1px;text-transform:uppercase">
+            📞 Call: 90194 29427</a>
+          <a href="https://wa.me/919019429427" target="_blank"
+              style="background:#1a1200;color:#c9a227;padding:13px 32px;
+              border-radius:5px;font-size:0.82em;font-weight:800;
+              text-decoration:none;letter-spacing:1px;text-transform:uppercase">
+            💬 WhatsApp Us</a>
+        </div>
+        <p style="color:rgba(255,255,255,0.6);font-size:0.78em;margin-top:18px">
+          📍 Near Dwarka Hotel, Habuwada Main Road, Karwar</p>
       </div>
-      <p style="color:rgba(255,255,255,0.6);font-size:0.78em;margin-top:18px">
-        📍 Near Dwarka Hotel, Habuwada Main Road, Karwar</p>
-    </div>
+    </div></div>
     """, unsafe_allow_html=True)
-    inner_close()
-    wrap_close()
 
-
-# ═══════════════════════════════════════════════
-# SERVICES PAGE
-# ═══════════════════════════════════════════════
+# ═══════════════════════════════════════
+# SERVICES
+# ═══════════════════════════════════════
 elif pg == "Services":
-    wrap_open("#f2f0eb")
-    inner_open()
-    sec_header("What We Do", "Our Services",
+    st.markdown("""
+    <div class="jdf-section" style="background:#f2f0eb">
+    <div class="jdf-inner">
+    """, unsafe_allow_html=True)
+    sec_header("What We Do","Our Services",
                "Comprehensive construction solutions across coastal Karnataka.")
     st.markdown("""
-    <div class="grid-2">
-      <div style="background:#fff;border-radius:8px;padding:22px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0">
+    <div class="jdf-grid-2" style="margin-top:8px">
+
+      <div class="card-white">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-          <div style="width:48px;height:48px;min-width:48px;
-            background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:50%;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.4em;border:2px solid #f0d060">🏠</div>
-          <div style="font-family:Cormorant Garamond,serif;font-size:1.1em;
-            font-weight:700;color:#1a1a1a">Residential Construction</div>
+          <div class="icon-circle" style="margin:0">🏠</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.1em;
+              font-weight:700;color:#1a1a1a">Residential Construction</div>
         </div>
         <div style="color:#666;font-size:0.84em;line-height:1.85;margin-bottom:10px">
           Custom bungalows, Multi-storey apartments, Duplex houses, Coastal architecture</div>
-        <span style="background:#fff8e1;color:#9a7a10;padding:3px 10px;border-radius:20px;
-          font-size:0.7em;font-weight:700;border:1px solid #e8c840">
-          📍 Karwar, Ankola, Honnawar, Mangalore</span>
+        <span class="gold-badge">📍 Karwar, Ankola, Honnawar, Mangalore</span>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:22px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0">
+
+      <div class="card-white">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-          <div style="width:48px;height:48px;min-width:48px;
-            background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:50%;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.4em;border:2px solid #f0d060">🏢</div>
-          <div style="font-family:Cormorant Garamond,serif;font-size:1.1em;
-            font-weight:700;color:#1a1a1a">Commercial Construction</div>
+          <div class="icon-circle" style="margin:0">🏢</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.1em;
+              font-weight:700;color:#1a1a1a">Commercial Construction</div>
         </div>
         <div style="color:#666;font-size:0.84em;line-height:1.85;margin-bottom:10px">
           Office complexes, Shopping centres, Hotels, Warehouses</div>
-        <span style="background:#fff8e1;color:#9a7a10;padding:3px 10px;border-radius:20px;
-          font-size:0.7em;font-weight:700;border:1px solid #e8c840">
-          📍 Mangalore, Karwar</span>
+        <span class="gold-badge">📍 Mangalore, Karwar</span>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:22px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0">
+
+      <div class="card-white">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-          <div style="width:48px;height:48px;min-width:48px;
-            background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:50%;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.4em;border:2px solid #f0d060">🛣️</div>
-          <div style="font-family:Cormorant Garamond,serif;font-size:1.1em;
-            font-weight:700;color:#1a1a1a">Infrastructure & Civil Works</div>
+          <div class="icon-circle" style="margin:0">🛣️</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.1em;
+              font-weight:700;color:#1a1a1a">Infrastructure &amp; Civil Works</div>
         </div>
         <div style="color:#666;font-size:0.84em;line-height:1.85;margin-bottom:10px">
           Roads, Bridges, Drainage, Retaining walls, Government contracts</div>
-        <span style="background:#fff8e1;color:#9a7a10;padding:3px 10px;border-radius:20px;
-          font-size:0.7em;font-weight:700;border:1px solid #e8c840">
-          📍 All Locations</span>
+        <span class="gold-badge">📍 All Locations</span>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:22px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0">
+
+      <div class="card-white">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-          <div style="width:48px;height:48px;min-width:48px;
-            background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:50%;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.4em;border:2px solid #f0d060">🔧</div>
-          <div style="font-family:Cormorant Garamond,serif;font-size:1.1em;
-            font-weight:700;color:#1a1a1a">Renovation & Remodelling</div>
+          <div class="icon-circle" style="margin:0">🔧</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.1em;
+              font-weight:700;color:#1a1a1a">Renovation &amp; Remodelling</div>
         </div>
         <div style="color:#666;font-size:0.84em;line-height:1.85;margin-bottom:10px">
-          Complete makeovers, Kitchen upgrades, Premium flooring, Extensions</div>
-        <span style="background:#fff8e1;color:#9a7a10;padding:3px 10px;border-radius:20px;
-          font-size:0.7em;font-weight:700;border:1px solid #e8c840">
-          📍 All Locations</span>
+          Complete makeovers, Kitchen upgrades, Premium flooring</div>
+        <span class="gold-badge">📍 All Locations</span>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:22px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0">
+
+      <div class="card-white">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-          <div style="width:48px;height:48px;min-width:48px;
-            background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:50%;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.4em;border:2px solid #f0d060">🏗️</div>
-          <div style="font-family:Cormorant Garamond,serif;font-size:1.1em;
-            font-weight:700;color:#1a1a1a">Foundation & Structural</div>
+          <div class="icon-circle" style="margin:0">🏗️</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.1em;
+              font-weight:700;color:#1a1a1a">Foundation &amp; Structural</div>
         </div>
         <div style="color:#666;font-size:0.84em;line-height:1.85;margin-bottom:10px">
-          Deep foundation, RCC structures, Steel frame, Earthquake-resistant design</div>
-        <span style="background:#fff8e1;color:#9a7a10;padding:3px 10px;border-radius:20px;
-          font-size:0.7em;font-weight:700;border:1px solid #e8c840">
-          📍 All Locations</span>
+          Deep foundation, RCC structures, Steel frame, Earthquake-resistant</div>
+        <span class="gold-badge">📍 All Locations</span>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:22px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0">
+
+      <div class="card-white">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-          <div style="width:48px;height:48px;min-width:48px;
-            background:linear-gradient(135deg,#fff8e1,#ffeaa0);border-radius:50%;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.4em;border:2px solid #f0d060">🎨</div>
-          <div style="font-family:Cormorant Garamond,serif;font-size:1.1em;
-            font-weight:700;color:#1a1a1a">Interior Construction</div>
+          <div class="icon-circle" style="margin:0">🎨</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.1em;
+              font-weight:700;color:#1a1a1a">Interior Construction</div>
         </div>
         <div style="color:#666;font-size:0.84em;line-height:1.85;margin-bottom:10px">
-          False ceilings, Waterproofing, MEP, Modular fixtures, Premium finishes</div>
-        <span style="background:#fff8e1;color:#9a7a10;padding:3px 10px;border-radius:20px;
-          font-size:0.7em;font-weight:700;border:1px solid #e8c840">
-          📍 All Locations</span>
+          False ceilings, Waterproofing, MEP, Modular fixtures</div>
+        <span class="gold-badge">📍 All Locations</span>
       </div>
+
     </div>
 
     <br><br>
     """, unsafe_allow_html=True)
-
-    sec_header("How We Work", "Our Build Process",
+    sec_header("How We Work","Our Build Process",
                "Transparent — from first meeting to final handover.")
     st.markdown("""
-    <div class="grid-3 process-grid">
-      <div style="background:#f9f7f2;border-radius:8px;padding:22px 14px;
-        text-align:center;border:1px solid #e0dcd0">
-        <div style="width:40px;height:40px;background:linear-gradient(135deg,#c9a227,#e8c040);
-          border-radius:50%;display:flex;align-items:center;justify-content:center;
-          font-family:Cormorant Garamond,serif;font-size:1.2em;font-weight:700;
-          color:#fff;margin:0 auto 10px">1</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.05em;
-          color:#1a1a1a;font-weight:700;margin-bottom:6px">Consultation</div>
+    <div class="jdf-grid-3" style="margin-top:8px">
+      <div class="card-white" style="text-align:center">
+        <div class="step-num">1</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.05em;
+            font-weight:700;color:#1a1a1a;margin-bottom:6px">Consultation</div>
         <div style="color:#888;font-size:0.8em;line-height:1.6">
-          Free meeting to understand your vision and requirements</div>
+            Free meeting to understand your vision and requirements</div>
       </div>
-      <div style="background:#f9f7f2;border-radius:8px;padding:22px 14px;
-        text-align:center;border:1px solid #e0dcd0">
-        <div style="width:40px;height:40px;background:linear-gradient(135deg,#c9a227,#e8c040);
-          border-radius:50%;display:flex;align-items:center;justify-content:center;
-          font-family:Cormorant Garamond,serif;font-size:1.2em;font-weight:700;
-          color:#fff;margin:0 auto 10px">2</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.05em;
-          color:#1a1a1a;font-weight:700;margin-bottom:6px">Design</div>
+      <div class="card-white" style="text-align:center">
+        <div class="step-num">2</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.05em;
+            font-weight:700;color:#1a1a1a;margin-bottom:6px">Design</div>
         <div style="color:#888;font-size:0.8em;line-height:1.6">
-          Plans, structural drawings and 3D visualisation</div>
+            Plans, structural drawings and 3D visualisation</div>
       </div>
-      <div style="background:#f9f7f2;border-radius:8px;padding:22px 14px;
-        text-align:center;border:1px solid #e0dcd0">
-        <div style="width:40px;height:40px;background:linear-gradient(135deg,#c9a227,#e8c040);
-          border-radius:50%;display:flex;align-items:center;justify-content:center;
-          font-family:Cormorant Garamond,serif;font-size:1.2em;font-weight:700;
-          color:#fff;margin:0 auto 10px">3</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.05em;
-          color:#1a1a1a;font-weight:700;margin-bottom:6px">Quotation</div>
+      <div class="card-white" style="text-align:center">
+        <div class="step-num">3</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.05em;
+            font-weight:700;color:#1a1a1a;margin-bottom:6px">Quotation</div>
         <div style="color:#888;font-size:0.8em;line-height:1.6">
-          Transparent itemised estimate with full material specs</div>
+            Transparent itemised estimate with full material specs</div>
       </div>
-      <div style="background:#f9f7f2;border-radius:8px;padding:22px 14px;
-        text-align:center;border:1px solid #e0dcd0">
-        <div style="width:40px;height:40px;background:linear-gradient(135deg,#c9a227,#e8c040);
-          border-radius:50%;display:flex;align-items:center;justify-content:center;
-          font-family:Cormorant Garamond,serif;font-size:1.2em;font-weight:700;
-          color:#fff;margin:0 auto 10px">4</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.05em;
-          color:#1a1a1a;font-weight:700;margin-bottom:6px">Agreement</div>
+      <div class="card-white" style="text-align:center">
+        <div class="step-num">4</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.05em;
+            font-weight:700;color:#1a1a1a;margin-bottom:6px">Agreement</div>
         <div style="color:#888;font-size:0.8em;line-height:1.6">
-          Clear contract with milestones and payment schedule</div>
+            Clear contract with milestones and payment schedule</div>
       </div>
-      <div style="background:#f9f7f2;border-radius:8px;padding:22px 14px;
-        text-align:center;border:1px solid #e0dcd0">
-        <div style="width:40px;height:40px;background:linear-gradient(135deg,#c9a227,#e8c040);
-          border-radius:50%;display:flex;align-items:center;justify-content:center;
-          font-family:Cormorant Garamond,serif;font-size:1.2em;font-weight:700;
-          color:#fff;margin:0 auto 10px">5</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.05em;
-          color:#1a1a1a;font-weight:700;margin-bottom:6px">Construction</div>
+      <div class="card-white" style="text-align:center">
+        <div class="step-num">5</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.05em;
+            font-weight:700;color:#1a1a1a;margin-bottom:6px">Construction</div>
         <div style="color:#888;font-size:0.8em;line-height:1.6">
-          Quality build with real-time updates and site access</div>
+            Quality build with real-time updates and site access</div>
       </div>
-      <div style="background:#f9f7f2;border-radius:8px;padding:22px 14px;
-        text-align:center;border:1px solid #e0dcd0">
-        <div style="width:40px;height:40px;background:linear-gradient(135deg,#c9a227,#e8c040);
-          border-radius:50%;display:flex;align-items:center;justify-content:center;
-          font-family:Cormorant Garamond,serif;font-size:1.2em;font-weight:700;
-          color:#fff;margin:0 auto 10px">6</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.05em;
-          color:#1a1a1a;font-weight:700;margin-bottom:6px">Handover</div>
+      <div class="card-white" style="text-align:center">
+        <div class="step-num">6</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.05em;
+            font-weight:700;color:#1a1a1a;margin-bottom:6px">Handover</div>
         <div style="color:#888;font-size:0.8em;line-height:1.6">
-          Final inspection, warranty resolution and keys</div>
+            Final inspection, warranty resolution and keys</div>
       </div>
     </div>
     <br>
     """, unsafe_allow_html=True)
-
     _, ctr, _ = st.columns([2,1,2])
     with ctr:
         if st.button("📞 Get Free Quote", key="svc_cta"): go("Contact Us")
+    st.markdown('</div></div>', unsafe_allow_html=True)
 
-    inner_close()
-    wrap_close()
-
-
-# ═══════════════════════════════════════════════
-# LOCATIONS PAGE
-# ═══════════════════════════════════════════════
+# ═══════════════════════════════════════
+# LOCATIONS
+# ═══════════════════════════════════════
 elif pg == "Locations":
-    wrap_open("#f2f0eb")
-    inner_open()
-    sec_header("Where We Work", "Our Locations",
+    st.markdown("""
+    <div class="jdf-section" style="background:#f2f0eb">
+    <div class="jdf-inner">
+    """, unsafe_allow_html=True)
+    sec_header("Where We Work","Our Locations",
                "Serving the coastal belt from Karwar to Mangalore.")
 
     loc_data = {
@@ -834,32 +831,27 @@ elif pg == "Locations":
         [(d["lat"],d["lon"]) for d in loc_data.values()],
         color="#c9a227", weight=2.5, opacity=0.6, dash_array="8 5"
     ).add_to(fmap)
-
     for city, d in loc_data.items():
         sz = 46 if d["hq"] else 36
         sym = "★" if d["hq"] else "●"
-        pin = (
-            f'<div style="width:{sz}px;height:{sz}px;'
-            f'background:linear-gradient(135deg,#9a7510,#c9a227,#f5d77e);'
-            f'border-radius:50% 50% 50% 0;transform:rotate(-45deg);'
-            f'border:3px solid #fff;box-shadow:0 4px 14px rgba(201,162,39,0.5);'
-            f'display:flex;align-items:center;justify-content:center">'
-            f'<span style="transform:rotate(45deg);color:#fff;'
-            f'font-size:{sz//2-3}px;font-weight:900">{sym}</span></div>'
-        )
-        popup = (
-            f'<div style="background:#fff;border-top:3px solid #c9a227;'
-            f'border-radius:8px;padding:14px;min-width:180px;font-family:sans-serif">'
-            f'<div style="color:#c9a227;font-weight:700;margin-bottom:8px">'
-            f'{"HQ: " if d["hq"] else ""}{city}</div>'
-            f'<div style="color:#555;font-size:0.82em;line-height:1.8">'
-            f'Projects: <b style="color:#c9a227">{d["projects"]}</b><br>'
-            f'Specialty: {d["spec"]}<br>Address: {d["addr"]}</div>'
-            f'<div style="margin-top:10px;text-align:center">'
-            f'<a href="tel:+919019429427" style="background:#c9a227;color:#fff;'
-            f'padding:6px 12px;border-radius:4px;text-decoration:none;font-weight:700">'
-            f'📞 Call Jason</a></div></div>'
-        )
+        pin = (f'<div style="width:{sz}px;height:{sz}px;'
+               f'background:linear-gradient(135deg,#9a7510,#c9a227,#f5d77e);'
+               f'border-radius:50% 50% 50% 0;transform:rotate(-45deg);'
+               f'border:3px solid #fff;box-shadow:0 4px 14px rgba(201,162,39,0.5);'
+               f'display:flex;align-items:center;justify-content:center">'
+               f'<span style="transform:rotate(45deg);color:#fff;'
+               f'font-size:{sz//2-3}px;font-weight:900">{sym}</span></div>')
+        popup = (f'<div style="background:#fff;border-top:3px solid #c9a227;'
+                 f'border-radius:8px;padding:14px;min-width:180px;font-family:sans-serif">'
+                 f'<div style="color:#c9a227;font-weight:700;margin-bottom:8px">'
+                 f'{"HQ: " if d["hq"] else ""}{city}</div>'
+                 f'<div style="color:#555;font-size:0.82em;line-height:1.8">'
+                 f'Projects: <b style="color:#c9a227">{d["projects"]}</b><br>'
+                 f'Specialty: {d["spec"]}<br>Address: {d["addr"]}</div>'
+                 f'<div style="margin-top:10px;text-align:center">'
+                 f'<a href="tel:+919019429427" style="background:#c9a227;color:#fff;'
+                 f'padding:6px 12px;border-radius:4px;text-decoration:none;font-weight:700">'
+                 f'📞 Call Jason</a></div></div>')
         folium.Marker(
             [d["lat"],d["lon"]],
             popup=folium.Popup(popup, max_width=220),
@@ -872,126 +864,111 @@ elif pg == "Locations":
             fill_opacity=0.12, weight=2, opacity=0.5
         ).add_to(fmap)
 
-    st.markdown(
-        '<div style="border-radius:10px;overflow:hidden;'
-        'box-shadow:0 6px 26px rgba(0,0,0,0.1);border:2px solid #ddd">',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div style="border-radius:10px;overflow:hidden;'
+                'box-shadow:0 6px 26px rgba(0,0,0,0.1);border:2px solid #ddd">',
+                unsafe_allow_html=True)
     st_folium(fmap, width=None, height=460, returned_objects=[])
     st.markdown('</div><br>', unsafe_allow_html=True)
 
     st.markdown("""
-    <div class="grid-4">
-      <div style="background:#fff;border-radius:8px;padding:18px 14px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0;
-        border-top:4px solid #c9a227">
+    <div class="jdf-grid-4">
+      <div class="card-white" style="border-top:4px solid #c9a227">
         <div style="color:#c9a227;font-size:0.6em;font-weight:700;
-          letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">HEADQUARTERS</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.3em;
-          color:#1a1a1a;font-weight:700;margin-bottom:6px">📍 Karwar</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:2em;
-          color:#c9a227;font-weight:700;margin-bottom:6px">200+</div>
+            letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">HEADQUARTERS</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3em;
+            font-weight:700;margin-bottom:6px">📍 Karwar</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2em;
+            color:#c9a227;font-weight:700;margin-bottom:6px">200+</div>
         <div style="color:#666;font-size:0.82em;margin-bottom:8px">
-          Residential, Commercial and Infrastructure</div>
+            Residential, Commercial and Infrastructure</div>
         <div style="color:#bbb;font-size:0.72em;border-top:1px solid #f0ede4;
-          padding-top:8px">Near Dwarka Hotel, Habuwada Main Road</div>
+            padding-top:8px">Near Dwarka Hotel, Habuwada Main Road</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:18px 14px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0;
-        border-top:4px solid #c9a227">
+      <div class="card-white" style="border-top:4px solid #c9a227">
         <div style="color:#888;font-size:0.6em;font-weight:700;
-          letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">ACTIVE OPS</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.3em;
-          color:#1a1a1a;font-weight:700;margin-bottom:6px">📍 Ankola</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:2em;
-          color:#c9a227;font-weight:700;margin-bottom:6px">80+</div>
+            letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">ACTIVE OPS</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3em;
+            font-weight:700;margin-bottom:6px">📍 Ankola</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2em;
+            color:#c9a227;font-weight:700;margin-bottom:6px">80+</div>
         <div style="color:#666;font-size:0.82em;margin-bottom:8px">
-          Residential Construction</div>
+            Residential Construction</div>
         <div style="color:#bbb;font-size:0.72em;border-top:1px solid #f0ede4;
-          padding-top:8px">Ankola, Uttara Kannada</div>
+            padding-top:8px">Ankola, Uttara Kannada</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:18px 14px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0;
-        border-top:4px solid #c9a227">
+      <div class="card-white" style="border-top:4px solid #c9a227">
         <div style="color:#888;font-size:0.6em;font-weight:700;
-          letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">ACTIVE OPS</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.3em;
-          color:#1a1a1a;font-weight:700;margin-bottom:6px">📍 Honnawar</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:2em;
-          color:#c9a227;font-weight:700;margin-bottom:6px">70+</div>
+            letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">ACTIVE OPS</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3em;
+            font-weight:700;margin-bottom:6px">📍 Honnawar</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2em;
+            color:#c9a227;font-weight:700;margin-bottom:6px">70+</div>
         <div style="color:#666;font-size:0.82em;margin-bottom:8px">
-          Residential and Infrastructure</div>
+            Residential and Infrastructure</div>
         <div style="color:#bbb;font-size:0.72em;border-top:1px solid #f0ede4;
-          padding-top:8px">Honnawar, Uttara Kannada</div>
+            padding-top:8px">Honnawar, Uttara Kannada</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:18px 14px;
-        box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0;
-        border-top:4px solid #c9a227">
+      <div class="card-white" style="border-top:4px solid #c9a227">
         <div style="color:#888;font-size:0.6em;font-weight:700;
-          letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">COMMERCIAL HUB</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:1.3em;
-          color:#1a1a1a;font-weight:700;margin-bottom:6px">📍 Mangalore</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:2em;
-          color:#c9a227;font-weight:700;margin-bottom:6px">150+</div>
+            letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">COMMERCIAL HUB</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.3em;
+            font-weight:700;margin-bottom:6px">📍 Mangalore</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2em;
+            color:#c9a227;font-weight:700;margin-bottom:6px">150+</div>
         <div style="color:#666;font-size:0.82em;margin-bottom:8px">
-          Commercial and High-Rise</div>
+            Commercial and High-Rise</div>
         <div style="color:#bbb;font-size:0.72em;border-top:1px solid #f0ede4;
-          padding-top:8px">Mangalore, Dakshina Kannada</div>
+            padding-top:8px">Mangalore, Dakshina Kannada</div>
       </div>
     </div>
+    </div></div>
     """, unsafe_allow_html=True)
 
-    inner_close()
-    wrap_close()
-
-
-# ═══════════════════════════════════════════════
-# ABOUT US PAGE
-# ═══════════════════════════════════════════════
+# ═══════════════════════════════════════
+# ABOUT US
+# ═══════════════════════════════════════
 elif pg == "About Us":
     owner_b64 = img_to_b64("jason_photo.jpg")
-
-    wrap_open("#f2f0eb")
-    inner_open()
-    sec_header("Who We Are", "About JDF Constructions")
-
-    owner_img_html = (
-        f'<img src="data:image/jpeg;base64,{owner_b64}" '
-        f'style="width:100%;border-radius:8px 8px 0 0;object-fit:cover;'
-        f'object-position:top center;display:block;max-height:280px">'
-    ) if owner_b64 else (
-        '<div style="background:#2d2000;border-radius:8px 8px 0 0;height:240px;'
-        'display:flex;align-items:center;justify-content:center;font-size:5em">👤</div>'
-    )
+    owner_tag = (f'<img src="data:image/jpeg;base64,{owner_b64}" '
+                 f'style="width:100%;border-radius:8px 8px 0 0;object-fit:cover;'
+                 f'object-position:top center;display:block;max-height:280px">') \
+                if owner_b64 else \
+                '<div style="background:#2d2000;border-radius:8px 8px 0 0;height:240px;' \
+                'display:flex;align-items:center;justify-content:center;font-size:5em">👤</div>'
 
     st.markdown(f"""
-    <div class="grid-1-2">
-      <!-- Left: owner card -->
+    <div class="jdf-section" style="background:#f2f0eb">
+    <div class="jdf-inner">
+    """, unsafe_allow_html=True)
+    sec_header("Who We Are","About JDF Constructions")
+    st.markdown(f"""
+    <div class="jdf-grid-about" style="margin-top:8px">
+
       <div>
-        {owner_img_html}
-        <div style="background:#fff;border-radius:0 0 8px 8px;padding:20px;
-          box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0;
-          border-top:4px solid #c9a227;text-align:center">
-          <div style="font-family:Cormorant Garamond,serif;font-size:1.5em;
-            font-weight:700;color:#1a1a1a">Jason Fernandes</div>
+        {owner_tag}
+        <div class="card-white" style="border-radius:0 0 8px 8px;border-top:4px solid #c9a227;
+            text-align:center">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.5em;
+              font-weight:700;color:#1a1a1a">Jason Fernandes</div>
           <div style="font-family:Montserrat,sans-serif;font-size:0.6em;
-            letter-spacing:2px;color:#c9a227;text-transform:uppercase;
-            font-weight:700;margin:5px 0 10px">Founder and Managing Director</div>
+              letter-spacing:2px;color:#c9a227;text-transform:uppercase;
+              font-weight:700;margin:5px 0 10px">Founder and Managing Director</div>
           <div style="color:#777;font-size:0.82em;line-height:1.7;margin-bottom:12px">
-            5+ years building exceptional structures across coastal Karnataka.</div>
+            15+ years building exceptional structures across coastal Karnataka.</div>
           <a href="tel:+919019429427"
-            style="display:inline-block;
-            background:linear-gradient(135deg,#c9a227,#e8c040);
-            color:#fff;padding:10px 22px;border-radius:5px;font-weight:700;
-            text-decoration:none;font-size:0.84em">📱 90194 29427</a>
+              style="display:inline-block;
+              background:linear-gradient(135deg,#c9a227,#e8c040);
+              color:#fff;padding:10px 22px;border-radius:5px;
+              font-weight:700;text-decoration:none;font-size:0.84em">
+            📱 90194 29427</a>
         </div>
       </div>
 
-      <!-- Right: story -->
-      <div style="padding:0 0 0 8px">
-        <div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.4em,3vw,2em);
-          font-weight:700;color:#1a1a1a;margin-bottom:14px">Our Story</div>
-        <div style="color:#555;line-height:1.9;font-size:0.9em">
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;
+            font-size:clamp(1.4em,3vw,2em);font-weight:700;
+            color:#1a1a1a;margin-bottom:14px">Our Story</div>
+        <div style="color:#555;line-height:1.9;font-size:0.9em;margin-bottom:20px">
           <p style="margin-bottom:12px">JDF Constructions was founded with a singular
           vision — to bring <strong>world-class construction quality</strong>
           to the beautiful coastal belt of Karnataka.</p>
@@ -999,49 +976,38 @@ elif pg == "About Us":
           <strong style="color:#c9a227">Jason Fernandes</strong>, the company has grown
           into one of the most trusted construction brands across Uttara Kannada
           and Dakshina Kannada districts.</p>
-          <p style="margin-bottom:12px">Starting from <strong>Karwar</strong>,
-          JDF has expanded to <strong>Ankola</strong>, <strong>Honnawar</strong> and
-          <strong>Mangalore</strong>.</p>
-          <p style="font-family:Cormorant Garamond,serif;font-size:1.15em;
-            color:#c9a227;font-style:italic">"Your dream project starts here."</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.15em;
+              color:#c9a227;font-style:italic">"Your dream project starts here."</p>
         </div>
-        <br>
-        <div class="grid-2">
-          <div style="background:#fff;border-radius:8px;padding:16px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.06);
-            border:1px solid #e0dcd0;border-left:3px solid #c9a227">
+
+        <div class="jdf-grid-2">
+          <div class="card-white" style="border-left:3px solid #c9a227">
             <div style="font-size:1.4em;margin-bottom:6px">🎯</div>
-            <div style="font-family:Cormorant Garamond,serif;font-size:1em;
-              font-weight:700;color:#1a1a1a;margin-bottom:3px">Mission</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1em;
+                font-weight:700;margin-bottom:3px">Mission</div>
             <div style="color:#888;font-size:0.8em">
-              Superior construction with integrity.</div>
+                Superior construction with integrity.</div>
           </div>
-          <div style="background:#fff;border-radius:8px;padding:16px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.06);
-            border:1px solid #e0dcd0;border-left:3px solid #c9a227">
+          <div class="card-white" style="border-left:3px solid #c9a227">
             <div style="font-size:1.4em;margin-bottom:6px">👁️</div>
-            <div style="font-family:Cormorant Garamond,serif;font-size:1em;
-              font-weight:700;color:#1a1a1a;margin-bottom:3px">Vision</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1em;
+                font-weight:700;margin-bottom:3px">Vision</div>
             <div style="color:#888;font-size:0.8em">
-              Karnataka's most trusted builder.</div>
+                Karnataka's most trusted builder.</div>
           </div>
-          <div style="background:#fff;border-radius:8px;padding:16px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.06);
-            border:1px solid #e0dcd0;border-left:3px solid #c9a227">
+          <div class="card-white" style="border-left:3px solid #c9a227">
             <div style="font-size:1.4em;margin-bottom:6px">💎</div>
-            <div style="font-family:Cormorant Garamond,serif;font-size:1em;
-              font-weight:700;color:#1a1a1a;margin-bottom:3px">Values</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1em;
+                font-weight:700;margin-bottom:3px">Values</div>
             <div style="color:#888;font-size:0.8em">
-              Quality, Integrity, Innovation</div>
+                Quality, Integrity, Innovation</div>
           </div>
-          <div style="background:#fff;border-radius:8px;padding:16px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.06);
-            border:1px solid #e0dcd0;border-left:3px solid #c9a227">
+          <div class="card-white" style="border-left:3px solid #c9a227">
             <div style="font-size:1.4em;margin-bottom:6px">🏅</div>
-            <div style="font-family:Cormorant Garamond,serif;font-size:1em;
-              font-weight:700;color:#1a1a1a;margin-bottom:3px">Commitment</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1em;
+                font-weight:700;margin-bottom:3px">Commitment</div>
             <div style="color:#888;font-size:0.8em">
-              Every project is our own home.</div>
+                Every project is our own home.</div>
           </div>
         </div>
       </div>
@@ -1050,129 +1016,115 @@ elif pg == "About Us":
     <br><br>
     """, unsafe_allow_html=True)
 
-    sec_header("Expertise", "Skills and Capabilities")
+    sec_header("Expertise","Skills and Capabilities")
     st.markdown("""
-    <div class="grid-2">
+    <div class="jdf-grid-skills" style="margin-top:8px">
       <div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
           <span style="font-size:0.84em;font-weight:600;color:#333">
-            Residential Construction</span>
+              Residential Construction</span>
           <span style="color:#c9a227;font-weight:700;font-size:0.84em">95%</span>
         </div>
-        <div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden;margin-bottom:16px">
-          <div style="height:100%;width:95%;
-            background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="width:95%"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
           <span style="font-size:0.84em;font-weight:600;color:#333">
-            Infrastructure and Civil</span>
+              Infrastructure &amp; Civil</span>
           <span style="color:#c9a227;font-weight:700;font-size:0.84em">82%</span>
         </div>
-        <div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden;margin-bottom:16px">
-          <div style="height:100%;width:82%;
-            background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="width:82%"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
           <span style="font-size:0.84em;font-weight:600;color:#333">
-            Project Management</span>
+              Project Management</span>
           <span style="color:#c9a227;font-weight:700;font-size:0.84em">93%</span>
         </div>
-        <div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden">
-          <div style="height:100%;width:93%;
-            background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div>
-        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="width:93%"></div></div>
       </div>
       <div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
           <span style="font-size:0.84em;font-weight:600;color:#333">
-            Commercial Projects</span>
+              Commercial Projects</span>
           <span style="color:#c9a227;font-weight:700;font-size:0.84em">88%</span>
         </div>
-        <div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden;margin-bottom:16px">
-          <div style="height:100%;width:88%;
-            background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="width:88%"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
           <span style="font-size:0.84em;font-weight:600;color:#333">
-            Interior Construction</span>
+              Interior Construction</span>
           <span style="color:#c9a227;font-weight:700;font-size:0.84em">90%</span>
         </div>
-        <div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden;margin-bottom:16px">
-          <div style="height:100%;width:90%;
-            background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="width:90%"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
           <span style="font-size:0.84em;font-weight:600;color:#333">
-            Client Satisfaction</span>
+              Client Satisfaction</span>
           <span style="color:#c9a227;font-weight:700;font-size:0.84em">98%</span>
         </div>
-        <div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden">
-          <div style="height:100%;width:98%;
-            background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div>
-        </div>
+        <div class="skill-bar-bg">
+          <div class="skill-bar-fill" style="width:98%"></div></div>
       </div>
     </div>
-
     <br><br>
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div class="grid-4">
-      <div style="background:#fff;border-radius:8px;padding:20px 14px;
-        text-align:center;box-shadow:0 3px 14px rgba(0,0,0,0.06);border:1px solid #e0dcd0">
+    <div class="jdf-grid-4">
+      <div class="card-white" style="text-align:center">
         <div style="font-size:1.8em;margin-bottom:8px">🏅</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:0.95em;
-          color:#1a1a1a;font-weight:700;margin-bottom:4px">Licensed Contractor</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:0.95em;
+            font-weight:700;margin-bottom:4px">Licensed Contractor</div>
         <div style="color:#aaa;font-size:0.73em">Karnataka PWD Certified</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:20px 14px;
-        text-align:center;box-shadow:0 3px 14px rgba(0,0,0,0.06);border:1px solid #e0dcd0">
+      <div class="card-white" style="text-align:center">
         <div style="font-size:1.8em;margin-bottom:8px">📋</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:0.95em;
-          color:#1a1a1a;font-weight:700;margin-bottom:4px">RERA Compliant</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:0.95em;
+            font-weight:700;margin-bottom:4px">RERA Compliant</div>
         <div style="color:#aaa;font-size:0.73em">All projects registered</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:20px 14px;
-        text-align:center;box-shadow:0 3px 14px rgba(0,0,0,0.06);border:1px solid #e0dcd0">
+      <div class="card-white" style="text-align:center">
         <div style="font-size:1.8em;margin-bottom:8px">🌱</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:0.95em;
-          color:#1a1a1a;font-weight:700;margin-bottom:4px">Green Building</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:0.95em;
+            font-weight:700;margin-bottom:4px">Green Building</div>
         <div style="color:#aaa;font-size:0.73em">Eco-friendly certified</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:20px 14px;
-        text-align:center;box-shadow:0 3px 14px rgba(0,0,0,0.06);border:1px solid #e0dcd0">
+      <div class="card-white" style="text-align:center">
         <div style="font-size:1.8em;margin-bottom:8px">🔒</div>
-        <div style="font-family:Cormorant Garamond,serif;font-size:0.95em;
-          color:#1a1a1a;font-weight:700;margin-bottom:4px">Quality Standards</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:0.95em;
+            font-weight:700;margin-bottom:4px">Quality Standards</div>
         <div style="color:#aaa;font-size:0.73em">ISO-aligned QMS</div>
       </div>
     </div>
     <br>
+    </div></div>
     """, unsafe_allow_html=True)
 
-    inner_close()
-    wrap_close()
-
-
-# ═══════════════════════════════════════════════
-# CONTACT US PAGE
-# ═══════════════════════════════════════════════
+# ═══════════════════════════════════════
+# CONTACT
+# ═══════════════════════════════════════
 elif pg == "Contact Us":
-    wrap_open("#f2f0eb")
-    inner_open()
-    sec_header("Get In Touch", "Contact JDF Constructions",
+    st.markdown("""
+    <div class="jdf-section" style="background:#f2f0eb">
+    <div class="jdf-inner">
+    """, unsafe_allow_html=True)
+    
+    sec_header("Get In Touch","Contact JDF Constructions",
                "Ready to build? Reach out for a free consultation.")
 
-    # Contact form uses st.columns (needed for Streamlit form widgets)
-    cf1, cf2 = st.columns([1.5, 1])
-
-    with cf1:
+    # Form on LEFT using st.columns
+    fc1, fc2 = st.columns([1.6, 1])
+    
+    with fc1:
         st.markdown(
             '<div style="background:#fff;border-radius:8px;padding:24px;'
-            'box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0">'
+            'box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0">',
+            unsafe_allow_html=True
+        )
+        st.markdown(
             '<div style="font-family:Cormorant Garamond,serif;font-size:1.3em;'
             'font-weight:700;color:#1a1a1a;margin-bottom:16px;padding-bottom:10px;'
-            'border-bottom:2px solid #f0ede4">📝 Send Us a Message</div>',
+            'border-bottom:2px solid #f0ede4">&#128221; Send Us a Message</div>',
             unsafe_allow_html=True
         )
         with st.form("enquiry_form", clear_on_submit=True):
@@ -1187,8 +1139,9 @@ elif pg == "Contact Us":
             budget = st.selectbox("Approximate Budget", [
                 "Under Rs.10 Lakhs","Rs.10-25 Lakhs","Rs.25-50 Lakhs",
                 "Rs.50 Lakhs-1 Crore","Above Rs.1 Crore"])
-            msg    = st.text_area("Project Details",
-                placeholder="Describe your site, timeline, requirements...", height=100)
+            msg = st.text_area("Project Details",
+                placeholder="Describe your site, timeline, requirements...",
+                height=100)
             if st.form_submit_button("Submit Enquiry"):
                 if name.strip() and phone.strip():
                     st.success(
@@ -1199,75 +1152,69 @@ elif pg == "Contact Us":
                     st.error("Please enter your name and phone number.")
         st.markdown('</div>', unsafe_allow_html=True)
 
-    with cf2:
+    with fc2:
         st.markdown("""
-        <div style="background:#fff;border-radius:8px;padding:20px;
-          box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0;
-          margin-bottom:12px">
-          <div style="font-family:Cormorant Garamond,serif;font-size:1.15em;
-            font-weight:700;color:#1a1a1a;margin-bottom:12px;padding-bottom:8px;
-            border-bottom:2px solid #f0ede4">Our Details</div>
+        <div class="card-white" style="margin-bottom:12px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.15em;
+              font-weight:700;color:#1a1a1a;margin-bottom:12px;padding-bottom:8px;
+              border-bottom:2px solid #f0ede4">Our Details</div>
           <div style="padding:8px 0;border-bottom:1px solid #f5f2ea">
             <span style="color:#c9a227;font-weight:700;font-size:0.9em">
-              Jason Fernandes</span><br>
+                Jason Fernandes</span><br>
             <span style="color:#bbb;font-size:0.73em">Founder and Managing Director</span>
           </div>
           <div style="padding:8px 0;border-bottom:1px solid #f5f2ea;font-size:0.86em">
-            📱 <strong>90194 29427</strong><br>
+            &#128222; <strong>90194 29427</strong><br>
             <span style="color:#bbb;font-size:0.74em">Call or WhatsApp</span>
           </div>
           <div style="padding:8px 0;border-bottom:1px solid #f5f2ea;
-            font-size:0.84em;color:#444">
-            📍 Near Dwarka Hotel, Habuwada Main Road<br>
-            <span style="color:#bbb;font-size:0.8em">Karwar, Karnataka — 581 301</span>
+              font-size:0.84em;color:#444">
+            &#128205; Near Dwarka Hotel, Habuwada Main Road<br>
+            <span style="color:#bbb;font-size:0.8em">Karwar, Karnataka 581 301</span>
           </div>
           <div style="padding:8px 0;border-bottom:1px solid #f5f2ea;
-            font-size:0.84em;color:#444">
-            🕐 Mon – Sat, 9 AM to 7 PM
-          </div>
+              font-size:0.84em;color:#444">&#128336; Mon-Sat, 9 AM to 7 PM</div>
           <div style="padding:8px 0;font-size:0.84em;color:#444">
-            🏙️ Karwar, Ankola, Honnawar, Mangalore
-          </div>
+            &#127961; Karwar, Ankola, Honnawar, Mangalore</div>
         </div>
 
-        <div style="background:#fff;border-radius:8px;padding:20px;
-          box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0">
-          <div style="font-family:Cormorant Garamond,serif;font-size:1.15em;
-            font-weight:700;color:#1a1a1a;margin-bottom:12px;padding-bottom:8px;
-            border-bottom:2px solid #f0ede4">Quick Connect</div>
+        <div class="card-white">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.15em;
+              font-weight:700;color:#1a1a1a;margin-bottom:12px;padding-bottom:8px;
+              border-bottom:2px solid #f0ede4">Quick Connect</div>
           <a href="tel:+919019429427"
-            style="display:block;text-align:center;padding:11px;border-radius:6px;
-            text-decoration:none;font-weight:700;font-size:0.83em;margin-bottom:8px;
-            background:linear-gradient(135deg,#c9a227,#e8c040);color:#fff">
-            📞 Call: 90194 29427</a>
+              style="display:block;text-align:center;padding:11px;border-radius:6px;
+              text-decoration:none;font-weight:700;font-size:0.83em;margin-bottom:8px;
+              background:linear-gradient(135deg,#c9a227,#e8c040);color:#fff">
+            &#128222; Call: 90194 29427</a>
           <a href="https://wa.me/919019429427" target="_blank"
-            style="display:block;text-align:center;padding:11px;border-radius:6px;
-            text-decoration:none;font-weight:700;font-size:0.83em;margin-bottom:8px;
-            background:linear-gradient(135deg,#25D366,#128C7E);color:#fff">
-            💬 WhatsApp Jason</a>
+              style="display:block;text-align:center;padding:11px;border-radius:6px;
+              text-decoration:none;font-weight:700;font-size:0.83em;margin-bottom:8px;
+              background:linear-gradient(135deg,#25D366,#128C7E);color:#fff">
+            &#128172; WhatsApp Jason</a>
           <a href="https://maps.google.com/?q=Dwarka+Hotel+Habuwada+Karwar"
-            target="_blank"
-            style="display:block;text-align:center;padding:11px;border-radius:6px;
-            text-decoration:none;font-weight:700;font-size:0.83em;
-            background:linear-gradient(135deg,#1a73e8,#4285F4);color:#fff">
-            🗺️ Get Directions</a>
+              target="_blank"
+              style="display:block;text-align:center;padding:11px;border-radius:6px;
+              text-decoration:none;font-weight:700;font-size:0.83em;
+              background:linear-gradient(135deg,#1a73e8,#4285F4);color:#fff">
+            &#128506; Get Directions</a>
         </div>
         """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    sec_header("Find Us", "Our Headquarters in Karwar")
+    sec_header("Find Us","Our Headquarters in Karwar")
+
     hq = folium.Map(location=[14.8135,74.1288], zoom_start=15, tiles=None)
     folium.TileLayer(
         "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
         attr="CartoDB"
     ).add_to(hq)
-    hq_pin = (
-        '<div style="width:54px;height:54px;'
-        'background:linear-gradient(135deg,#9a7510,#c9a227,#f5d77e);'
-        'border-radius:50%;border:3px solid #fff;'
-        'box-shadow:0 0 20px rgba(201,162,39,0.7);'
-        'display:flex;align-items:center;justify-content:center;font-size:24px">🏗️</div>'
-    )
+    hq_pin = ('<div style="width:54px;height:54px;'
+              'background:linear-gradient(135deg,#9a7510,#c9a227,#f5d77e);'
+              'border-radius:50%;border:3px solid #fff;'
+              'box-shadow:0 0 20px rgba(201,162,39,0.7);'
+              'display:flex;align-items:center;justify-content:center;'
+              'font-size:24px">&#127959;</div>')
     folium.Marker(
         [14.8135,74.1288],
         popup=folium.Popup(
@@ -1277,59 +1224,51 @@ elif pg == "Contact Us":
             'Karnataka 581 301<br><br>'
             '<a href="tel:+919019429427" style="background:#c9a227;color:#fff;'
             'padding:6px 12px;border-radius:4px;text-decoration:none;font-weight:700">'
-            '📞 90194 29427</a></div>', max_width=220
-        ),
+            '&#128222; 90194 29427</a></div>', max_width=220),
         tooltip="JDF Constructions Headquarters",
         icon=folium.DivIcon(html=hq_pin, icon_size=(54,54), icon_anchor=(27,27))
     ).add_to(hq)
     st.markdown(
         '<div style="border-radius:10px;overflow:hidden;'
         'box-shadow:0 6px 26px rgba(0,0,0,0.1);border:2px solid #ddd">',
-        unsafe_allow_html=True
-    )
+        unsafe_allow_html=True)
     st_folium(hq, width=None, height=380, returned_objects=[])
     st.markdown('</div>', unsafe_allow_html=True)
-
-    inner_close()
-    wrap_close()
-
+    
+    st.markdown('</div></div>', unsafe_allow_html=True)
 
 # ── FOOTER
 st.markdown("""
 <div style="background:linear-gradient(135deg,#1c1400,#2d2000,#1a1200);
-  padding:40px 30px 24px;width:100%">
-  <div class="footer-grid" style="max-width:1100px;margin:0 auto;display:flex;
-    justify-content:space-between;flex-wrap:wrap;gap:24px">
-
-    <div style="min-width:200px">
-      <div style="font-family:Cormorant Garamond,serif;font-size:1.6em;
-        color:#c9a227;font-weight:700;letter-spacing:2px;margin-bottom:6px">
+     padding:40px 30px 24px;width:100%">
+  <div style="max-width:1100px;margin:0 auto;display:flex;
+       justify-content:space-between;flex-wrap:wrap;gap:24px">
+    <div style="min-width:180px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.6em;
+          color:#c9a227;font-weight:700;letter-spacing:2px;margin-bottom:6px">
         🏗️ JDF CONSTRUCTIONS</div>
       <div style="color:rgba(201,162,39,0.55);font-style:italic;
-        font-family:Cormorant Garamond,serif;font-size:1em;margin-bottom:8px">
+          font-family:'Cormorant Garamond',serif;font-size:1em;margin-bottom:8px">
         "Your dream project starts here."</div>
       <div style="color:#4a4000;font-size:0.78em">
         Karwar | Ankola | Honnawar | Mangalore</div>
     </div>
-
     <div style="color:#4a4000;font-size:0.8em;line-height:2.1;min-width:160px">
       <div style="color:rgba(201,162,39,0.55);font-weight:700;
-        margin-bottom:6px;letter-spacing:1px;font-size:0.85em">CONTACT</div>
+          margin-bottom:6px;letter-spacing:1px;font-size:0.85em">CONTACT</div>
       <div>📍 Habuwada Main Road, Karwar</div>
       <div>📞 +91 90194 29427</div>
       <div>🕐 Mon–Sat, 9 AM to 7 PM</div>
     </div>
-
     <div style="color:#4a4000;font-size:0.8em;line-height:2.3;min-width:130px">
       <div style="color:rgba(201,162,39,0.55);font-weight:700;
-        margin-bottom:6px;letter-spacing:1px;font-size:0.85em">PAGES</div>
+          margin-bottom:6px;letter-spacing:1px;font-size:0.85em">PAGES</div>
       <div>Home | Services | Locations</div>
       <div>About Us | Contact Us</div>
     </div>
   </div>
-
   <div style="border-top:1px solid #2a2000;margin-top:20px;padding-top:16px;
-    text-align:center">
+       text-align:center">
     <div style="color:#3a3000;font-size:0.74em">
       © 2024 JDF Constructions. All Rights Reserved.</div>
   </div>
