@@ -363,7 +363,7 @@ if pg == "Home":
         'border-right:1px solid rgba(201,162,39,0.2);padding:10px 12px">'
         '<div style="font-size:1.5em;margin-bottom:4px">🏅</div>'
         '<div style="font-family:Cormorant Garamond,serif;'
-        'font-size:clamp(1.6em,3.5vw,2.8em);font-weight:700;color:#c9a227">15+</div>'
+        'font-size:clamp(1.6em,3.5vw,2.8em);font-weight:700;color:#c9a227">5+</div>'
         '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.5em,1.2vw,0.6em);'
         'text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">'
         'Years of Excellence</div></div>'
@@ -978,7 +978,7 @@ elif pg == "About Us":
             letter-spacing:2px;color:#c9a227;text-transform:uppercase;
             font-weight:700;margin:5px 0 10px">Founder and Managing Director</div>
           <div style="color:#777;font-size:0.82em;line-height:1.7;margin-bottom:12px">
-            15+ years building exceptional structures across coastal Karnataka.</div>
+            5+ years building exceptional structures across coastal Karnataka.</div>
           <a href="tel:+919019429427"
             style="display:inline-block;
             background:linear-gradient(135deg,#c9a227,#e8c040);
