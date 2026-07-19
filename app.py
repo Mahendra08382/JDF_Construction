@@ -78,6 +78,7 @@ div[data-testid="stVerticalBlock"] > div { padding: 0 !important; }
     box-shadow: none !important;
     outline: none !important;
 }
+            
 
 /* FORM */
 .stForm [data-testid="stFormSubmitButton"] > button {
@@ -357,6 +358,135 @@ div[data-testid="stVerticalBlock"] > div { padding: 0 !important; }
 </style>
 """, unsafe_allow_html=True)
 
+
+# Add this to your main CSS block
+st.markdown("""
+<style>
+/* Force nav buttons horizontal on ALL screen sizes */
+div[data-testid="stHorizontalBlock"] {
+    flex-wrap: nowrap !important;
+    gap: 4px !important;
+    overflow-x: auto !important;
+    padding: 8px 8px !important;
+    background: #fff !important;
+    scrollbar-width: none !important;
+}
+div[data-testid="stHorizontalBlock"]::-webkit-scrollbar {
+    display: none !important;
+}
+div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {
+    min-width: 60px !important;
+    flex: 1 !important;
+}
+.stButton > button {
+    background: #c9a227 !important;
+    background-color: #c9a227 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    font-size: clamp(0.55em, 1.5vw, 0.72em) !important;
+    padding: 10px 2px !important;
+    width: 100% !important;
+    white-space: nowrap !important;
+}
+.stButton > button:hover {
+    background: #a8841f !important;
+    background-color: #a8841f !important;
+    color: #fff !important;
+    border: none !important;
+}
+.stButton > button:focus,
+.stButton > button:active {
+    background: #c9a227 !important;
+    background-color: #c9a227 !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Hero stays horizontal on mobile */
+.hero-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+.hero-logo {
+    width: 120px !important;
+    min-width: 120px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px !important;
+    border-right: 1px solid rgba(201,162,39,0.2) !important;
+}
+.hero-center {
+    flex: 1 !important;
+    min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 24px 12px !important;
+    overflow: hidden !important;
+}
+.hero-owner {
+    width: 160px !important;
+    min-width: 160px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px !important;
+    border-left: 1px solid rgba(201,162,39,0.2) !important;
+}
+
+/* Stats row stays horizontal */
+.stats-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    border-top: 1px solid rgba(201,162,39,0.2) !important;
+    padding: 16px 10px !important;
+    overflow-x: auto !important;
+}
+.stat-box {
+    flex: 1 !important;
+    min-width: 70px !important;
+    text-align: center !important;
+    padding: 8px 6px !important;
+    border-right: 1px solid rgba(201,162,39,0.2) !important;
+}
+.stat-box:last-child {
+    border-right: none !important;
+}
+
+/* Grids stay as grids on mobile */
+@media screen and (max-width: 700px) {
+    .hero-logo { width: 80px !important; min-width: 80px !important; padding: 10px !important; }
+    .hero-logo img { width: 60px !important; }
+    .hero-owner { width: 120px !important; min-width: 120px !important; padding: 10px !important; }
+    .hero-center { padding: 16px 8px !important; }
+
+    .jdf-grid-4 { grid-template-columns: repeat(2,1fr) !important; }
+    .jdf-grid-3 { grid-template-columns: repeat(2,1fr) !important; }
+    .jdf-grid-2 { grid-template-columns: repeat(1,1fr) !important; }
+    .jdf-grid-about { grid-template-columns: 1fr !important; }
+    .jdf-grid-contact { grid-template-columns: 1fr !important; }
+    .jdf-grid-skills { grid-template-columns: 1fr !important; }
+
+    .jdf-inner { padding: 0 12px !important; }
+    .jdf-section { padding: 24px 0 !important; }
+    .info-bar { 
+        padding: 6px 12px !important; 
+        font-size: 0.68em !important;
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+}
+</style>
+""", unsafe_allow_html=True)
+
 # ── INFO BAR
 st.markdown("""
 <div class="info-bar">
@@ -376,7 +506,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── NAV BUTTONS (must stay as st.columns for Python click events)
-nc = st.columns([0.3,1,1,1,1,1,0.3])
+nc = st.columns([0.1, 1, 1, 1, 1, 1, 0.1])
 with nc[1]:
     if st.button("HOME",      key="n1"): go("Home")
 with nc[2]:
@@ -392,20 +522,25 @@ st.markdown('<div style="margin-top:-10px"></div>', unsafe_allow_html=True)
 
 # ── SECTION HEADER helper
 def sec_header(over, title, desc=""):
-    d = f'<p style="color:#777;font-size:0.91em;max-width:540px;margin:8px auto 0;line-height:1.75">{desc}</p>' if desc else ""
-    st.markdown(f"""
-    <div class="sec-header">
-        <span style="font-family:Montserrat,sans-serif;font-size:0.68em;
-            letter-spacing:4px;text-transform:uppercase;color:#c9a227;
-            font-weight:700;display:block;margin-bottom:6px">{over}</span>
-        <div style="font-family:'Cormorant Garamond',serif;
-            font-size:clamp(1.6em,4vw,2.4em);font-weight:700;
-            color:#1a1a1a;line-height:1.15">{title}</div>
-        {d}
-        <div style="width:52px;height:2px;
-            background:linear-gradient(90deg,#c9a227,#f5d77e);
-            margin:12px auto 0;border-radius:2px"></div>
-    </div>""", unsafe_allow_html=True)
+    desc_part = ""
+    if desc:
+        desc_part = '<p style="color:#777;font-size:0.91em;max-width:540px;margin:8px auto 0;line-height:1.75">' + desc + '</p>'
+    
+    html = (
+        '<div style="text-align:center;margin-bottom:24px;padding:0 8px">'
+        '<span style="font-family:Montserrat,sans-serif;font-size:0.68em;'
+        'letter-spacing:4px;text-transform:uppercase;color:#c9a227;'
+        'font-weight:700;display:block;margin-bottom:6px">' + over + '</span>'
+        '<div style="font-family:Cormorant Garamond,serif;'
+        'font-size:clamp(1.6em,4vw,2.4em);font-weight:700;'
+        'color:#1a1a1a;line-height:1.15">' + title + '</div>'
+        + desc_part +
+        '<div style="width:52px;height:2px;'
+        'background:linear-gradient(90deg,#c9a227,#f5d77e);'
+        'margin:12px auto 0;border-radius:2px"></div>'
+        '</div>'
+    )
+    st.markdown(html, unsafe_allow_html=True)
 
 # ═══════════════════════════════════════
 # HOME
