@@ -497,28 +497,59 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── BRAND BAR
+# ── NAVBAR + NAV BUTTONS (pure HTML)
 st.markdown("""
-<div class="brand-bar">
-    <span style="font-family:'Cormorant Garamond',serif;font-size:1.4em;
-    font-weight:700;color:#b8960c;letter-spacing:2px">🏗️ JDF CONSTRUCTIONS</span>
+<div style="background:#fff;border-bottom:3px solid #c9a227;
+     padding:0 20px;min-height:60px;display:flex;align-items:center;
+     box-shadow:0 2px 10px rgba(0,0,0,0.06)">
+  <span style="font-family:'Cormorant Garamond',serif;font-size:1.4em;
+      font-weight:700;color:#b8960c;letter-spacing:2px">&#127959; JDF CONSTRUCTIONS</span>
+</div>
+
+<div style="background:#fff;padding:10px 16px;display:flex;
+     flex-direction:row;gap:6px;flex-wrap:nowrap;overflow-x:auto;
+     border-bottom:2px solid #f0ede4;scrollbar-width:none">
+  <a href="?page=Home" target="_self"
+     style="flex:1;min-width:60px;text-align:center;padding:10px 4px;
+     background:#c9a227;color:#fff;border-radius:8px;
+     font-weight:700;font-size:clamp(0.55em,2.5vw,0.75em);
+     text-decoration:none;letter-spacing:1px;white-space:nowrap;
+     display:block">HOME</a>
+  <a href="?page=Services" target="_self"
+     style="flex:1;min-width:60px;text-align:center;padding:10px 4px;
+     background:#c9a227;color:#fff;border-radius:8px;
+     font-weight:700;font-size:clamp(0.55em,2.5vw,0.75em);
+     text-decoration:none;letter-spacing:1px;white-space:nowrap;
+     display:block">SERVICES</a>
+  <a href="?page=Locations" target="_self"
+     style="flex:1;min-width:60px;text-align:center;padding:10px 4px;
+     background:#c9a227;color:#fff;border-radius:8px;
+     font-weight:700;font-size:clamp(0.55em,2.5vw,0.75em);
+     text-decoration:none;letter-spacing:1px;white-space:nowrap;
+     display:block">LOCATIONS</a>
+  <a href="?page=About Us" target="_self"
+     style="flex:1;min-width:60px;text-align:center;padding:10px 4px;
+     background:#c9a227;color:#fff;border-radius:8px;
+     font-weight:700;font-size:clamp(0.55em,2.5vw,0.75em);
+     text-decoration:none;letter-spacing:1px;white-space:nowrap;
+     display:block">ABOUT</a>
+  <a href="?page=Contact Us" target="_self"
+     style="flex:1;min-width:60px;text-align:center;padding:10px 4px;
+     background:#c9a227;color:#fff;border-radius:8px;
+     font-weight:700;font-size:clamp(0.55em,2.5vw,0.75em);
+     text-decoration:none;letter-spacing:1px;white-space:nowrap;
+     display:block">CONTACT</a>
 </div>
 """, unsafe_allow_html=True)
 
-# ── NAV BUTTONS (must stay as st.columns for Python click events)
-nc = st.columns([0.1, 1, 1, 1, 1, 1, 0.1])
-with nc[1]:
-    if st.button("HOME",      key="n1"): go("Home")
-with nc[2]:
-    if st.button("SERVICES",  key="n2"): go("Services")
-with nc[3]:
-    if st.button("LOCATIONS", key="n3"): go("Locations")
-with nc[4]:
-    if st.button("ABOUT US",  key="n4"): go("About Us")
-with nc[5]:
-    if st.button("CONTACT",   key="n5"): go("Contact Us")
-
-st.markdown('<div style="margin-top:-10px"></div>', unsafe_allow_html=True)
+# ── Handle navigation from URL params
+query_params = st.query_params
+if "page" in query_params:
+    new_page = query_params["page"]
+    if new_page != st.session_state.page:
+        st.session_state.page = new_page
+        st.query_params.clear()
+        st.rerun()
 
 # ── SECTION HEADER helper
 def sec_header(over, title, desc=""):
@@ -560,54 +591,134 @@ if pg == "Home":
         owner_tag = '<div style="height:180px;background:#2d2000;border-radius:6px 6px 0 0;display:flex;align-items:center;justify-content:center;font-size:3em">&#128100;</div>'
 
     full_hero = (
-        '<div style="background:linear-gradient(135deg,#1c1400,#2d2000,#1a1200);border-bottom:4px solid #c9a227;width:100%">'
-        '<div class="hero-row">'
-        '<div class="hero-logo">' + logo_tag + '</div>'
-        '<div class="hero-center"><div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.45em,1.2vw,0.65em);letter-spacing:4px;text-transform:uppercase;color:rgba(201,162,39,0.65);font-weight:600;margin-bottom:12px">KARNATAKA\'S PREMIER CONSTRUCTION COMPANY</div>'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(2.8em,8vw,5.5em);font-weight:700;color:#fff;line-height:0.9;letter-spacing:3px">JDF</div>'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1em,3vw,1.8em);font-weight:600;color:#c9a227;letter-spacing:6px;text-transform:uppercase;margin:10px 0 12px">CONSTRUCTIONS</div>'
-        '<div style="width:50px;height:2px;background:linear-gradient(90deg,#c9a227,#f5d77e);margin:0 auto 14px"></div>'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.9em,2vw,1.25em);color:#d4c898;font-style:italic;margin-bottom:20px">"Your dream project starts here."</div>'
-        '<div>'
-        '<span class="loc-pill">&#128205; Karwar</span>'
-        '<span class="loc-pill">&#128205; Ankola</span>'
-        '<span class="loc-pill">&#128205; Honnawar</span>'
-        '<span class="loc-pill">&#128205; Mangalore</span>'
-        '</div>'
-        '</div></div>'
-        '<div class="hero-owner"><div style="width:160px">'
-        + owner_tag +
-        '<div style="background:#fff;border-radius:0 0 8px 8px;border-top:3px solid #c9a227;padding:12px;text-align:center">'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:1em;font-weight:700;color:#1a1a1a">Jason Fernandes</div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:0.55em;letter-spacing:2px;color:#c9a227;text-transform:uppercase;font-weight:700;margin:3px 0">Founder &amp; Owner</div>'
-        '<div style="font-size:0.73em;color:#444;font-weight:600">&#128222; 90194 29427</div>'
-        '</div></div></div>'
-        '</div>'
-        '<div class="stats-row">'
-        '<div class="stat-box">'
-        '<div style="font-size:1.4em;margin-bottom:4px">&#127959;</div>'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.5em,4vw,2.6em);font-weight:700;color:#c9a227">500+</div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.48em,1.2vw,0.58em);text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">Projects Completed</div>'
-        '</div>'
-        '<div class="stat-box">'
-        '<div style="font-size:1.4em;margin-bottom:4px">&#128205;</div>'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.5em,4vw,2.6em);font-weight:700;color:#c9a227">4</div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.48em,1.2vw,0.58em);text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">Cities Served</div>'
-        '</div>'
-        '<div class="stat-box">'
-        '<div style="font-size:1.4em;margin-bottom:4px">&#127885;</div>'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.5em,4vw,2.6em);font-weight:700;color:#c9a227">15+</div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.48em,1.2vw,0.58em);text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">Years of Excellence</div>'
-        '</div>'
-        '<div class="stat-box">'
-        '<div style="font-size:1.4em;margin-bottom:4px">&#128522;</div>'
-        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.5em,4vw,2.6em);font-weight:700;color:#c9a227">1000+</div>'
-        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.48em,1.2vw,0.58em);text-transform:uppercase;letter-spacing:2px;color:#fff;margin-top:4px">Happy Clients</div>'
-        '</div>'
-        '</div>'
-        '</div>'
-    )
+    '<div style="background:linear-gradient(135deg,#1c1400,#2d2000,#1a1200);'
+    'border-bottom:4px solid #c9a227;width:100%">'
+    
+    # ONE ROW - forced horizontal always
+    '<div style="display:flex;flex-direction:row;width:100%;'
+    'flex-wrap:nowrap;min-height:280px">'
+    
+    # Logo col
+    '<div style="width:clamp(60px,15vw,180px);min-width:clamp(60px,15vw,180px);'
+    'display:flex;align-items:center;justify-content:center;'
+    'padding:clamp(8px,2vw,24px);'
+    'border-right:1px solid rgba(201,162,39,0.2)">'
+    + logo_tag +
+    '</div>'
+    
+    # Center col
+    '<div style="flex:1;min-width:0;display:flex;align-items:center;'
+    'justify-content:center;text-align:center;'
+    'padding:clamp(16px,3vw,40px) clamp(8px,2vw,20px)">'
+    '<div style="width:100%">'
+    '<div style="font-family:Montserrat,sans-serif;'
+    'font-size:clamp(0.38em,1.8vw,0.65em);'
+    'letter-spacing:clamp(2px,1vw,4px);text-transform:uppercase;'
+    'color:rgba(201,162,39,0.65);font-weight:600;margin-bottom:8px">'
+    "KARNATAKA'S PREMIER CONSTRUCTION COMPANY</div>"
+    '<div style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(2em,7vw,5.5em);'
+    'font-weight:700;color:#fff;line-height:0.9;letter-spacing:3px">JDF</div>'
+    '<div style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(0.7em,2.5vw,1.8em);'
+    'font-weight:600;color:#c9a227;letter-spacing:clamp(3px,2vw,10px);'
+    'text-transform:uppercase;margin:8px 0 10px">CONSTRUCTIONS</div>'
+    '<div style="width:40px;height:2px;'
+    'background:linear-gradient(90deg,#c9a227,#f5d77e);'
+    'margin:0 auto 10px"></div>'
+    '<div style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(0.7em,1.8vw,1.25em);'
+    'color:#d4c898;font-style:italic;margin-bottom:14px">'
+    '"Your dream project starts here."</div>'
+    '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px">'
+    '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;'
+    'padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
+    'font-size:clamp(0.5em,1.5vw,0.72em);font-weight:600;'
+    'background:rgba(201,162,39,0.1)">&#128205; Karwar</span>'
+    '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;'
+    'padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
+    'font-size:clamp(0.5em,1.5vw,0.72em);font-weight:600;'
+    'background:rgba(201,162,39,0.1)">&#128205; Ankola</span>'
+    '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;'
+    'padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
+    'font-size:clamp(0.5em,1.5vw,0.72em);font-weight:600;'
+    'background:rgba(201,162,39,0.1)">&#128205; Honnawar</span>'
+    '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;'
+    'padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
+    'font-size:clamp(0.5em,1.5vw,0.72em);font-weight:600;'
+    'background:rgba(201,162,39,0.1)">&#128205; Mangalore</span>'
+    '</div>'
+    '</div></div>'
+    
+    # Owner col
+    '<div style="width:clamp(90px,18vw,200px);min-width:clamp(90px,18vw,200px);'
+    'display:flex;align-items:center;justify-content:center;'
+    'padding:clamp(8px,2vw,24px);'
+    'border-left:1px solid rgba(201,162,39,0.2)">'
+    '<div style="width:100%">'
+    + owner_tag +
+    '<div style="background:#fff;border-radius:0 0 8px 8px;'
+    'border-top:3px solid #c9a227;padding:clamp(6px,1.5vw,12px);text-align:center">'
+    '<div style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(0.7em,1.8vw,1em);'
+    'font-weight:700;color:#1a1a1a;line-height:1.2">Jason Fernandes</div>'
+    '<div style="font-family:Montserrat,sans-serif;'
+    'font-size:clamp(0.4em,1vw,0.55em);'
+    'letter-spacing:1px;color:#c9a227;text-transform:uppercase;'
+    'font-weight:700;margin:3px 0">Founder &amp; Owner</div>'
+    '<div style="font-size:clamp(0.5em,1.2vw,0.73em);color:#444;font-weight:600">'
+    '&#128222; 90194 29427</div>'
+    '</div></div></div>'
+    
+    '</div>'  # end flex row
+    
+    # Stats - also forced horizontal
+    '<div style="border-top:1px solid rgba(201,162,39,0.2);'
+    'display:flex;flex-direction:row;flex-wrap:nowrap;'
+    'padding:clamp(12px,2vw,24px) clamp(8px,2vw,40px)">'
+    
+    '<div style="flex:1;text-align:center;padding:8px clamp(4px,1vw,12px);'
+    'border-right:1px solid rgba(201,162,39,0.2)">'
+    '<div style="font-size:clamp(1em,2.5vw,1.4em);margin-bottom:4px">&#127959;</div>'
+    '<div style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700;color:#c9a227">500+</div>'
+    '<div style="font-family:Montserrat,sans-serif;'
+    'font-size:clamp(0.38em,1vw,0.58em);text-transform:uppercase;'
+    'letter-spacing:1px;color:#fff;margin-top:4px">Projects</div>'
+    '</div>'
+    
+    '<div style="flex:1;text-align:center;padding:8px clamp(4px,1vw,12px);'
+    'border-right:1px solid rgba(201,162,39,0.2)">'
+    '<div style="font-size:clamp(1em,2.5vw,1.4em);margin-bottom:4px">&#128205;</div>'
+    '<div style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700;color:#c9a227">4</div>'
+    '<div style="font-family:Montserrat,sans-serif;'
+    'font-size:clamp(0.38em,1vw,0.58em);text-transform:uppercase;'
+    'letter-spacing:1px;color:#fff;margin-top:4px">Cities</div>'
+    '</div>'
+    
+    '<div style="flex:1;text-align:center;padding:8px clamp(4px,1vw,12px);'
+    'border-right:1px solid rgba(201,162,39,0.2)">'
+    '<div style="font-size:clamp(1em,2.5vw,1.4em);margin-bottom:4px">&#127885;</div>'
+    '<div style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700;color:#c9a227">15+</div>'
+    '<div style="font-family:Montserrat,sans-serif;'
+    'font-size:clamp(0.38em,1vw,0.58em);text-transform:uppercase;'
+    'letter-spacing:1px;color:#fff;margin-top:4px">Years</div>'
+    '</div>'
+    
+    '<div style="flex:1;text-align:center;padding:8px clamp(4px,1vw,12px)">'
+    '<div style="font-size:clamp(1em,2.5vw,1.4em);margin-bottom:4px">&#128522;</div>'
+    '<div style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700;color:#c9a227">1000+</div>'
+    '<div style="font-family:Montserrat,sans-serif;'
+    'font-size:clamp(0.38em,1vw,0.58em);text-transform:uppercase;'
+    'letter-spacing:1px;color:#fff;margin-top:4px">Clients</div>'
+    '</div>'
+    
+    '</div>'  # end stats
+    '</div>'  # end hero outer
+)
     st.markdown(full_hero, unsafe_allow_html=True)
 
     # ── SERVICES
