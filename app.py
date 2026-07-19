@@ -1175,176 +1175,191 @@ elif pg == "Locations":
 # ═══════════════════════════════════════
 elif pg == "About Us":
     owner_b64 = img_to_b64("jason_photo.jpg")
-    owner_tag = (f'<img src="data:image/jpeg;base64,{owner_b64}" '
-                 f'style="width:100%;border-radius:8px 8px 0 0;object-fit:cover;'
-                 f'object-position:top center;display:block;max-height:280px">') \
-                if owner_b64 else \
-                '<div style="background:#2d2000;border-radius:8px 8px 0 0;height:240px;' \
-                'display:flex;align-items:center;justify-content:center;font-size:5em">👤</div>'
+    owner_tag = (
+        '<img src="data:image/jpeg;base64,' + owner_b64 + '" '
+        'style="width:100%;height:220px;object-fit:cover;'
+        'object-position:top center;display:block;border-radius:8px 8px 0 0">'
+    ) if owner_b64 else (
+        '<div style="background:#2d2000;border-radius:8px 8px 0 0;height:220px;'
+        'display:flex;align-items:center;justify-content:center;font-size:5em">&#128100;</div>'
+    )
 
-    st.markdown(f"""
-    <div class="jdf-section" style="background:#f2f0eb">
-    <div class="jdf-inner">
-    """, unsafe_allow_html=True)
-    sec_header("Who We Are","About JDF Constructions")
-    st.markdown(f"""
-    <div class="jdf-grid-about" style="margin-top:8px">
+    st.markdown('<div class="jdf-section" style="background:#f2f0eb"><div class="jdf-inner">', unsafe_allow_html=True)
+    sec_header("Who We Are", "About JDF Constructions")
 
-      <div>
-        {owner_tag}
-        <div class="card-white" style="border-radius:0 0 8px 8px;border-top:4px solid #c9a227;
-            text-align:center">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:1.5em;
-              font-weight:700;color:#1a1a1a">Jason Fernandes</div>
-          <div style="font-family:Montserrat,sans-serif;font-size:0.6em;
-              letter-spacing:2px;color:#c9a227;text-transform:uppercase;
-              font-weight:700;margin:5px 0 10px">Founder and Managing Director</div>
-          <div style="color:#777;font-size:0.82em;line-height:1.7;margin-bottom:12px">
-            15+ years building exceptional structures across coastal Karnataka.</div>
-          <a href="tel:+919019429427"
-              style="display:inline-block;
-              background:linear-gradient(135deg,#c9a227,#e8c040);
-              color:#fff;padding:10px 22px;border-radius:5px;
-              font-weight:700;text-decoration:none;font-size:0.84em">
-            📱 90194 29427</a>
-        </div>
-      </div>
+    about_html = (
+        # ── MAIN ROW (always horizontal)
+        '<div style="display:flex;flex-direction:row;flex-wrap:nowrap;gap:20px;align-items:start;margin-bottom:30px">'
 
-      <div>
-        <div style="font-family:'Cormorant Garamond',serif;
-            font-size:clamp(1.4em,3vw,2em);font-weight:700;
-            color:#1a1a1a;margin-bottom:14px">Our Story</div>
-        <div style="color:#555;line-height:1.9;font-size:0.9em;margin-bottom:20px">
-          <p style="margin-bottom:12px">JDF Constructions was founded with a singular
-          vision — to bring <strong>world-class construction quality</strong>
-          to the beautiful coastal belt of Karnataka.</p>
-          <p style="margin-bottom:12px">Under the leadership of
-          <strong style="color:#c9a227">Jason Fernandes</strong>, the company has grown
-          into one of the most trusted construction brands across Uttara Kannada
-          and Dakshina Kannada districts.</p>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1.15em;
-              color:#c9a227;font-style:italic">"Your dream project starts here."</p>
-        </div>
+        # LEFT - owner card
+        '<div style="width:clamp(140px,28vw,280px);min-width:clamp(140px,28vw,280px)">'
+        + owner_tag +
+        '<div style="background:#fff;border-radius:0 0 8px 8px;padding:16px;'
+        'box-shadow:0 4px 18px rgba(0,0,0,0.07);border:1px solid #e0dcd0;'
+        'border-top:4px solid #c9a227;text-align:center">'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.9em,2.5vw,1.5em);'
+        'font-weight:700;color:#1a1a1a">Jason Fernandes</div>'
+        '<div style="font-family:Montserrat,sans-serif;font-size:clamp(0.45em,1.2vw,0.6em);'
+        'letter-spacing:2px;color:#c9a227;text-transform:uppercase;'
+        'font-weight:700;margin:5px 0 10px">Founder and Managing Director</div>'
+        '<div style="color:#777;font-size:clamp(0.6em,1.5vw,0.82em);line-height:1.7;margin-bottom:12px">'
+        '15+ years building exceptional structures across coastal Karnataka.</div>'
+        '<a href="tel:+919019429427" '
+        'style="display:inline-block;background:linear-gradient(135deg,#c9a227,#e8c040);'
+        'color:#fff;padding:8px 16px;border-radius:5px;font-weight:700;'
+        'text-decoration:none;font-size:clamp(0.6em,1.5vw,0.84em)">&#128222; 90194 29427</a>'
+        '</div></div>'
 
-        <div class="jdf-grid-2">
-          <div class="card-white" style="border-left:3px solid #c9a227">
-            <div style="font-size:1.4em;margin-bottom:6px">🎯</div>
-            <div style="font-family:'Cormorant Garamond',serif;font-size:1em;
-                font-weight:700;margin-bottom:3px">Mission</div>
-            <div style="color:#888;font-size:0.8em">
-                Superior construction with integrity.</div>
-          </div>
-          <div class="card-white" style="border-left:3px solid #c9a227">
-            <div style="font-size:1.4em;margin-bottom:6px">👁️</div>
-            <div style="font-family:'Cormorant Garamond',serif;font-size:1em;
-                font-weight:700;margin-bottom:3px">Vision</div>
-            <div style="color:#888;font-size:0.8em">
-                Karnataka's most trusted builder.</div>
-          </div>
-          <div class="card-white" style="border-left:3px solid #c9a227">
-            <div style="font-size:1.4em;margin-bottom:6px">💎</div>
-            <div style="font-family:'Cormorant Garamond',serif;font-size:1em;
-                font-weight:700;margin-bottom:3px">Values</div>
-            <div style="color:#888;font-size:0.8em">
-                Quality, Integrity, Innovation</div>
-          </div>
-          <div class="card-white" style="border-left:3px solid #c9a227">
-            <div style="font-size:1.4em;margin-bottom:6px">🏅</div>
-            <div style="font-family:'Cormorant Garamond',serif;font-size:1em;
-                font-weight:700;margin-bottom:3px">Commitment</div>
-            <div style="color:#888;font-size:0.8em">
-                Every project is our own home.</div>
-          </div>
-        </div>
-      </div>
-    </div>
+        # RIGHT - story + mission cards
+        '<div style="flex:1;min-width:0">'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.2em,3vw,2em);'
+        'font-weight:700;color:#1a1a1a;margin-bottom:12px">Our Story</div>'
+        '<div style="color:#555;line-height:1.85;font-size:clamp(0.72em,1.8vw,0.9em);margin-bottom:16px">'
+        '<p style="margin-bottom:10px">JDF Constructions was founded with a singular vision — to bring '
+        '<strong>world-class construction quality</strong> to the beautiful coastal belt of Karnataka.</p>'
+        '<p style="margin-bottom:10px">Under the leadership of '
+        '<strong style="color:#c9a227">Jason Fernandes</strong>, the company has grown '
+        'into one of the most trusted construction brands across Uttara Kannada and Dakshina Kannada.</p>'
+        '<p style="font-family:Cormorant Garamond,serif;font-size:1.1em;'
+        'color:#c9a227;font-style:italic">"Your dream project starts here."</p>'
+        '</div>'
 
-    <br><br>
-    """, unsafe_allow_html=True)
+        # Mission/Vision 2x2 grid - pure CSS grid, always 2 cols
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">'
 
-    sec_header("Expertise","Skills and Capabilities")
-    st.markdown("""
-    <div class="jdf-grid-skills" style="margin-top:8px">
-      <div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
-          <span style="font-size:0.84em;font-weight:600;color:#333">
-              Residential Construction</span>
-          <span style="color:#c9a227;font-weight:700;font-size:0.84em">95%</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="width:95%"></div></div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
-          <span style="font-size:0.84em;font-weight:600;color:#333">
-              Infrastructure &amp; Civil</span>
-          <span style="color:#c9a227;font-weight:700;font-size:0.84em">82%</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="width:82%"></div></div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
-          <span style="font-size:0.84em;font-weight:600;color:#333">
-              Project Management</span>
-          <span style="color:#c9a227;font-weight:700;font-size:0.84em">93%</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="width:93%"></div></div>
-      </div>
-      <div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
-          <span style="font-size:0.84em;font-weight:600;color:#333">
-              Commercial Projects</span>
-          <span style="color:#c9a227;font-weight:700;font-size:0.84em">88%</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="width:88%"></div></div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
-          <span style="font-size:0.84em;font-weight:600;color:#333">
-              Interior Construction</span>
-          <span style="color:#c9a227;font-weight:700;font-size:0.84em">90%</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="width:90%"></div></div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:5px">
-          <span style="font-size:0.84em;font-weight:600;color:#333">
-              Client Satisfaction</span>
-          <span style="color:#c9a227;font-weight:700;font-size:0.84em">98%</span>
-        </div>
-        <div class="skill-bar-bg">
-          <div class="skill-bar-fill" style="width:98%"></div></div>
-      </div>
-    </div>
-    <br><br>
-    """, unsafe_allow_html=True)
+        '<div style="background:#fff;border-radius:8px;padding:14px;'
+        'box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid #e0dcd0;border-left:3px solid #c9a227">'
+        '<div style="font-size:1.3em;margin-bottom:5px">&#127919;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.85em,2vw,1em);'
+        'font-weight:700;margin-bottom:3px">Mission</div>'
+        '<div style="color:#888;font-size:clamp(0.65em,1.5vw,0.8em)">Superior construction with integrity.</div>'
+        '</div>'
 
-    st.markdown("""
-    <div class="jdf-grid-4">
-      <div class="card-white" style="text-align:center">
-        <div style="font-size:1.8em;margin-bottom:8px">🏅</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:0.95em;
-            font-weight:700;margin-bottom:4px">Licensed Contractor</div>
-        <div style="color:#aaa;font-size:0.73em">Karnataka PWD Certified</div>
-      </div>
-      <div class="card-white" style="text-align:center">
-        <div style="font-size:1.8em;margin-bottom:8px">📋</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:0.95em;
-            font-weight:700;margin-bottom:4px">RERA Compliant</div>
-        <div style="color:#aaa;font-size:0.73em">All projects registered</div>
-      </div>
-      <div class="card-white" style="text-align:center">
-        <div style="font-size:1.8em;margin-bottom:8px">🌱</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:0.95em;
-            font-weight:700;margin-bottom:4px">Green Building</div>
-        <div style="color:#aaa;font-size:0.73em">Eco-friendly certified</div>
-      </div>
-      <div class="card-white" style="text-align:center">
-        <div style="font-size:1.8em;margin-bottom:8px">🔒</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:0.95em;
-            font-weight:700;margin-bottom:4px">Quality Standards</div>
-        <div style="color:#aaa;font-size:0.73em">ISO-aligned QMS</div>
-      </div>
-    </div>
-    <br>
-    </div></div>
-    """, unsafe_allow_html=True)
+        '<div style="background:#fff;border-radius:8px;padding:14px;'
+        'box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid #e0dcd0;border-left:3px solid #c9a227">'
+        '<div style="font-size:1.3em;margin-bottom:5px">&#128065;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.85em,2vw,1em);'
+        'font-weight:700;margin-bottom:3px">Vision</div>'
+        '<div style="color:#888;font-size:clamp(0.65em,1.5vw,0.8em)">Karnataka\'s most trusted builder.</div>'
+        '</div>'
+
+        '<div style="background:#fff;border-radius:8px;padding:14px;'
+        'box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid #e0dcd0;border-left:3px solid #c9a227">'
+        '<div style="font-size:1.3em;margin-bottom:5px">&#128142;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.85em,2vw,1em);'
+        'font-weight:700;margin-bottom:3px">Values</div>'
+        '<div style="color:#888;font-size:clamp(0.65em,1.5vw,0.8em)">Quality, Integrity, Innovation.</div>'
+        '</div>'
+
+        '<div style="background:#fff;border-radius:8px;padding:14px;'
+        'box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid #e0dcd0;border-left:3px solid #c9a227">'
+        '<div style="font-size:1.3em;margin-bottom:5px">&#127885;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.85em,2vw,1em);'
+        'font-weight:700;margin-bottom:3px">Commitment</div>'
+        '<div style="color:#888;font-size:clamp(0.65em,1.5vw,0.8em)">Every project is our own home.</div>'
+        '</div>'
+
+        '</div>'  # end mission grid
+        '</div>'  # end right col
+        '</div>'  # end main row
+
+        # ── SKILLS
+        '<div style="margin-bottom:30px">'
+        '<div style="text-align:center;margin-bottom:16px">'
+        '<span style="font-family:Montserrat,sans-serif;font-size:0.68em;'
+        'letter-spacing:4px;text-transform:uppercase;color:#c9a227;font-weight:700">'
+        'EXPERTISE</span>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(1.4em,3vw,2em);'
+        'font-weight:700;color:#1a1a1a">Skills and Capabilities</div>'
+        '<div style="width:52px;height:2px;background:linear-gradient(90deg,#c9a227,#f5d77e);'
+        'margin:10px auto 0;border-radius:2px"></div>'
+        '</div>'
+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">'
+
+        '<div>'
+        '<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
+        '<span style="font-size:clamp(0.7em,1.8vw,0.84em);font-weight:600;color:#333">Residential Construction</span>'
+        '<span style="color:#c9a227;font-weight:700;font-size:clamp(0.7em,1.8vw,0.84em)">95%</span></div>'
+        '<div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden;margin-bottom:14px">'
+        '<div style="height:100%;width:95%;background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div></div>'
+
+        '<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
+        '<span style="font-size:clamp(0.7em,1.8vw,0.84em);font-weight:600;color:#333">Infrastructure</span>'
+        '<span style="color:#c9a227;font-weight:700;font-size:clamp(0.7em,1.8vw,0.84em)">82%</span></div>'
+        '<div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden;margin-bottom:14px">'
+        '<div style="height:100%;width:82%;background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div></div>'
+
+        '<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
+        '<span style="font-size:clamp(0.7em,1.8vw,0.84em);font-weight:600;color:#333">Project Management</span>'
+        '<span style="color:#c9a227;font-weight:700;font-size:clamp(0.7em,1.8vw,0.84em)">93%</span></div>'
+        '<div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden">'
+        '<div style="height:100%;width:93%;background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div></div>'
+        '</div>'
+
+        '<div>'
+        '<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
+        '<span style="font-size:clamp(0.7em,1.8vw,0.84em);font-weight:600;color:#333">Commercial Projects</span>'
+        '<span style="color:#c9a227;font-weight:700;font-size:clamp(0.7em,1.8vw,0.84em)">88%</span></div>'
+        '<div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden;margin-bottom:14px">'
+        '<div style="height:100%;width:88%;background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div></div>'
+
+        '<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
+        '<span style="font-size:clamp(0.7em,1.8vw,0.84em);font-weight:600;color:#333">Interior Construction</span>'
+        '<span style="color:#c9a227;font-weight:700;font-size:clamp(0.7em,1.8vw,0.84em)">90%</span></div>'
+        '<div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden;margin-bottom:14px">'
+        '<div style="height:100%;width:90%;background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div></div>'
+
+        '<div style="display:flex;justify-content:space-between;margin-bottom:5px">'
+        '<span style="font-size:clamp(0.7em,1.8vw,0.84em);font-weight:600;color:#333">Client Satisfaction</span>'
+        '<span style="color:#c9a227;font-weight:700;font-size:clamp(0.7em,1.8vw,0.84em)">98%</span></div>'
+        '<div style="background:#e8e4d8;border-radius:50px;height:6px;overflow:hidden">'
+        '<div style="height:100%;width:98%;background:linear-gradient(90deg,#c9a227,#f5d77e);border-radius:50px"></div></div>'
+        '</div>'
+
+        '</div>'  # end skills grid
+        '</div>'  # end skills section
+
+        # ── CERTIFICATIONS
+        '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">'
+
+        '<div style="background:#fff;border-radius:8px;padding:clamp(12px,2vw,20px) 10px;'
+        'text-align:center;box-shadow:0 3px 14px rgba(0,0,0,0.06);border:1px solid #e0dcd0">'
+        '<div style="font-size:clamp(1.2em,2.5vw,1.8em);margin-bottom:6px">&#127885;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.7em,1.5vw,0.95em);'
+        'font-weight:700;margin-bottom:4px">Licensed</div>'
+        '<div style="color:#aaa;font-size:clamp(0.55em,1.2vw,0.73em)">PWD Certified</div>'
+        '</div>'
+
+        '<div style="background:#fff;border-radius:8px;padding:clamp(12px,2vw,20px) 10px;'
+        'text-align:center;box-shadow:0 3px 14px rgba(0,0,0,0.06);border:1px solid #e0dcd0">'
+        '<div style="font-size:clamp(1.2em,2.5vw,1.8em);margin-bottom:6px">&#128203;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.7em,1.5vw,0.95em);'
+        'font-weight:700;margin-bottom:4px">RERA</div>'
+        '<div style="color:#aaa;font-size:clamp(0.55em,1.2vw,0.73em)">All registered</div>'
+        '</div>'
+
+        '<div style="background:#fff;border-radius:8px;padding:clamp(12px,2vw,20px) 10px;'
+        'text-align:center;box-shadow:0 3px 14px rgba(0,0,0,0.06);border:1px solid #e0dcd0">'
+        '<div style="font-size:clamp(1.2em,2.5vw,1.8em);margin-bottom:6px">&#127807;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.7em,1.5vw,0.95em);'
+        'font-weight:700;margin-bottom:4px">Green</div>'
+        '<div style="color:#aaa;font-size:clamp(0.55em,1.2vw,0.73em)">Eco certified</div>'
+        '</div>'
+
+        '<div style="background:#fff;border-radius:8px;padding:clamp(12px,2vw,20px) 10px;'
+        'text-align:center;box-shadow:0 3px 14px rgba(0,0,0,0.06);border:1px solid #e0dcd0">'
+        '<div style="font-size:clamp(1.2em,2.5vw,1.8em);margin-bottom:6px">&#128274;</div>'
+        '<div style="font-family:Cormorant Garamond,serif;font-size:clamp(0.7em,1.5vw,0.95em);'
+        'font-weight:700;margin-bottom:4px">Quality</div>'
+        '<div style="color:#aaa;font-size:clamp(0.55em,1.2vw,0.73em)">ISO-aligned</div>'
+        '</div>'
+
+        '</div>'  # end certs
+    )
+
+    st.markdown(about_html, unsafe_allow_html=True)
+    st.markdown('</div></div>', unsafe_allow_html=True)
 
 # ═══════════════════════════════════════
 # CONTACT
