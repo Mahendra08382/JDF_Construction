@@ -484,6 +484,47 @@ div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {
         text-align: center !important;
     }
 }
+
+ /* ── ANIMATIONS ── */
+@keyframes logoRotate {
+    0%   { transform: rotate(0deg)  scale(1);    }
+    25%  { transform: rotate(6deg)  scale(1.08); }
+    50%  { transform: rotate(0deg)  scale(1.12); }
+    75%  { transform: rotate(-6deg) scale(1.08); }
+    100% { transform: rotate(0deg)  scale(1);    }
+}
+@keyframes achievementFloat {
+    0%   { transform: translateY(0px);  }
+    25%  { transform: translateY(-10px);}
+    50%  { transform: translateY(0px);  }
+    75%  { transform: translateY(6px);  }
+    100% { transform: translateY(0px);  }
+}
+@keyframes pillSlide {
+    0%   { opacity:0; transform: translateX(-20px); }
+    100% { opacity:1; transform: translateX(0);     }
+}
+@keyframes numGlow {
+    0%,100% { color:#c9a227; text-shadow:none; }
+    50%      { color:#f5d77e; text-shadow:0 0 15px rgba(201,162,39,0.8); }
+}
+
+.anim-logo img {
+    width: clamp(100px,14vw,190px) !important;
+    animation: logoRotate 5s ease-in-out infinite;
+    transform-origin: center;
+    display: block;
+}
+.anim-stat-1 { animation: achievementFloat 3s ease-in-out infinite 0.0s; }
+.anim-stat-2 { animation: achievementFloat 3s ease-in-out infinite 0.3s; }
+.anim-stat-3 { animation: achievementFloat 3s ease-in-out infinite 0.6s; }
+.anim-stat-4 { animation: achievementFloat 3s ease-in-out infinite 0.9s; }
+.anim-num    { animation: numGlow 3s ease-in-out infinite; }
+.anim-pill-1 { animation: pillSlide 0.6s ease forwards 0.1s; opacity:0; }
+.anim-pill-2 { animation: pillSlide 0.6s ease forwards 0.3s; opacity:0; }
+.anim-pill-3 { animation: pillSlide 0.6s ease forwards 0.5s; opacity:0; }
+.anim-pill-4 { animation: pillSlide 0.6s ease forwards 0.7s; opacity:0; }     
+            
 </style>
 """, unsafe_allow_html=True)
 
@@ -593,64 +634,75 @@ if pg == "Home":
     full_hero = (
     '<div style="background:linear-gradient(135deg,#1c1400,#2d2000,#1a1200);'
     'border-bottom:4px solid #c9a227;width:100%">'
-    
-    # ONE ROW - forced horizontal always
+
+    # ── TOP ROW
     '<div style="display:flex;flex-direction:row;width:100%;'
     'flex-wrap:nowrap;min-height:280px">'
-    
-    # Logo col
+
+    # LEFT logo — rotates
     '<div style="width:clamp(60px,15vw,180px);min-width:clamp(60px,15vw,180px);'
     'display:flex;align-items:center;justify-content:center;'
     'padding:clamp(8px,2vw,24px);'
     'border-right:1px solid rgba(201,162,39,0.2)">'
+    '<div class="anim-logo">'
     + logo_tag +
-    '</div>'
-    
-    # Center col
+    '</div></div>'
+
+    # CENTER — no animations, stays still
     '<div style="flex:1;min-width:0;display:flex;align-items:center;'
     'justify-content:center;text-align:center;'
     'padding:clamp(16px,3vw,40px) clamp(8px,2vw,20px)">'
     '<div style="width:100%">'
+
     '<div style="font-family:Montserrat,sans-serif;'
     'font-size:clamp(0.38em,1.8vw,0.65em);'
     'letter-spacing:clamp(2px,1vw,4px);text-transform:uppercase;'
     'color:rgba(201,162,39,0.65);font-weight:600;margin-bottom:8px">'
     "KARNATAKA'S PREMIER CONSTRUCTION COMPANY</div>"
+
     '<div style="font-family:Cormorant Garamond,serif;'
     'font-size:clamp(2em,7vw,5.5em);'
-    'font-weight:700;color:#fff;line-height:0.9;letter-spacing:3px">JDF</div>'
+    'font-weight:700;color:#fff;line-height:0.9;letter-spacing:3px">'
+    'JDF</div>'
+
     '<div style="font-family:Cormorant Garamond,serif;'
-    'font-size:clamp(0.7em,2.5vw,1.8em);'
-    'font-weight:600;color:#c9a227;letter-spacing:clamp(3px,2vw,10px);'
-    'text-transform:uppercase;margin:8px 0 10px">CONSTRUCTIONS</div>'
+    'font-size:clamp(0.7em,2.5vw,1.8em);font-weight:600;color:#c9a227;'
+    'letter-spacing:clamp(3px,2vw,10px);text-transform:uppercase;'
+    'margin:8px 0 10px">'
+    'CONSTRUCTIONS</div>'
+
     '<div style="width:40px;height:2px;'
     'background:linear-gradient(90deg,#c9a227,#f5d77e);'
-    'margin:0 auto 10px"></div>'
+    'margin:0 auto 10px;border-radius:2px"></div>'
+
     '<div style="font-family:Cormorant Garamond,serif;'
     'font-size:clamp(0.7em,1.8vw,1.25em);'
     'color:#d4c898;font-style:italic;margin-bottom:14px">'
     '"Your dream project starts here."</div>'
+
+    # pills — staggered slide in
     '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px">'
-    '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;'
-    'padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
+    '<span class="anim-pill-1" style="border:1px solid rgba(201,162,39,0.5);'
+    'color:#c9a227;padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
     'font-size:clamp(0.5em,1.5vw,0.72em);font-weight:600;'
     'background:rgba(201,162,39,0.1)">&#128205; Karwar</span>'
-    '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;'
-    'padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
+    '<span class="anim-pill-2" style="border:1px solid rgba(201,162,39,0.5);'
+    'color:#c9a227;padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
     'font-size:clamp(0.5em,1.5vw,0.72em);font-weight:600;'
     'background:rgba(201,162,39,0.1)">&#128205; Ankola</span>'
-    '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;'
-    'padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
+    '<span class="anim-pill-3" style="border:1px solid rgba(201,162,39,0.5);'
+    'color:#c9a227;padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
     'font-size:clamp(0.5em,1.5vw,0.72em);font-weight:600;'
     'background:rgba(201,162,39,0.1)">&#128205; Honnawar</span>'
-    '<span style="border:1px solid rgba(201,162,39,0.5);color:#c9a227;'
-    'padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
+    '<span class="anim-pill-4" style="border:1px solid rgba(201,162,39,0.5);'
+    'color:#c9a227;padding:3px clamp(6px,1.5vw,12px);border-radius:30px;'
     'font-size:clamp(0.5em,1.5vw,0.72em);font-weight:600;'
     'background:rgba(201,162,39,0.1)">&#128205; Mangalore</span>'
     '</div>'
+
     '</div></div>'
-    
-    # Owner col
+
+    # RIGHT owner — no animation, stays still
     '<div style="width:clamp(90px,18vw,200px);min-width:clamp(90px,18vw,200px);'
     'display:flex;align-items:center;justify-content:center;'
     'padding:clamp(8px,2vw,24px);'
@@ -658,7 +710,8 @@ if pg == "Home":
     '<div style="width:100%">'
     + owner_tag +
     '<div style="background:#fff;border-radius:0 0 8px 8px;'
-    'border-top:3px solid #c9a227;padding:clamp(6px,1.5vw,12px);text-align:center">'
+    'border-top:3px solid #c9a227;'
+    'padding:clamp(6px,1.5vw,12px);text-align:center">'
     '<div style="font-family:Cormorant Garamond,serif;'
     'font-size:clamp(0.7em,1.8vw,1em);'
     'font-weight:700;color:#1a1a1a;line-height:1.2">Jason Fernandes</div>'
@@ -666,56 +719,65 @@ if pg == "Home":
     'font-size:clamp(0.4em,1vw,0.55em);'
     'letter-spacing:1px;color:#c9a227;text-transform:uppercase;'
     'font-weight:700;margin:3px 0">Founder &amp; Owner</div>'
-    '<div style="font-size:clamp(0.5em,1.2vw,0.73em);color:#444;font-weight:600">'
+    '<div style="font-size:clamp(0.5em,1.2vw,0.73em);'
+    'color:#444;font-weight:600">'
     '&#128222; 90194 29427</div>'
     '</div></div></div>'
-    
-    '</div>'  # end flex row
-    
-    # Stats - also forced horizontal
+
+    '</div>'  # end top row
+
+    # ── STATS ROW — only these 4 animate
     '<div style="border-top:1px solid rgba(201,162,39,0.2);'
     'display:flex;flex-direction:row;flex-wrap:nowrap;'
     'padding:clamp(12px,2vw,24px) clamp(8px,2vw,40px)">'
-    
-    '<div style="flex:1;text-align:center;padding:8px clamp(4px,1vw,12px);'
+
+    # Stat 1
+    '<div class="anim-stat-1" style="flex:1;text-align:center;'
+    'padding:8px clamp(4px,1vw,12px);'
     'border-right:1px solid rgba(201,162,39,0.2)">'
     '<div style="font-size:clamp(1em,2.5vw,1.4em);margin-bottom:4px">&#127959;</div>'
-    '<div style="font-family:Cormorant Garamond,serif;'
-    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700;color:#c9a227">500+</div>'
+    '<div class="anim-num" style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700">500+</div>'
     '<div style="font-family:Montserrat,sans-serif;'
     'font-size:clamp(0.38em,1vw,0.58em);text-transform:uppercase;'
     'letter-spacing:1px;color:#fff;margin-top:4px">Projects</div>'
     '</div>'
-    
-    '<div style="flex:1;text-align:center;padding:8px clamp(4px,1vw,12px);'
+
+    # Stat 2
+    '<div class="anim-stat-2" style="flex:1;text-align:center;'
+    'padding:8px clamp(4px,1vw,12px);'
     'border-right:1px solid rgba(201,162,39,0.2)">'
     '<div style="font-size:clamp(1em,2.5vw,1.4em);margin-bottom:4px">&#128205;</div>'
-    '<div style="font-family:Cormorant Garamond,serif;'
-    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700;color:#c9a227">4</div>'
+    '<div class="anim-num" style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700">4</div>'
     '<div style="font-family:Montserrat,sans-serif;'
     'font-size:clamp(0.38em,1vw,0.58em);text-transform:uppercase;'
     'letter-spacing:1px;color:#fff;margin-top:4px">Cities</div>'
     '</div>'
-    
-    '<div style="flex:1;text-align:center;padding:8px clamp(4px,1vw,12px);'
+
+    # Stat 3
+    '<div class="anim-stat-3" style="flex:1;text-align:center;'
+    'padding:8px clamp(4px,1vw,12px);'
     'border-right:1px solid rgba(201,162,39,0.2)">'
     '<div style="font-size:clamp(1em,2.5vw,1.4em);margin-bottom:4px">&#127885;</div>'
-    '<div style="font-family:Cormorant Garamond,serif;'
-    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700;color:#c9a227">15+</div>'
+    '<div class="anim-num" style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700">15+</div>'
     '<div style="font-family:Montserrat,sans-serif;'
     'font-size:clamp(0.38em,1vw,0.58em);text-transform:uppercase;'
     'letter-spacing:1px;color:#fff;margin-top:4px">Years</div>'
     '</div>'
-    
-    '<div style="flex:1;text-align:center;padding:8px clamp(4px,1vw,12px)">'
+
+    # Stat 4
+    '<div class="anim-stat-4" style="flex:1;text-align:center;'
+    'padding:8px clamp(4px,1vw,12px)">'
     '<div style="font-size:clamp(1em,2.5vw,1.4em);margin-bottom:4px">&#128522;</div>'
-    '<div style="font-family:Cormorant Garamond,serif;'
-    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700;color:#c9a227">1000+</div>'
+    '<div class="anim-num" style="font-family:Cormorant Garamond,serif;'
+    'font-size:clamp(1.2em,3.5vw,2.6em);font-weight:700">1000+</div>'
     '<div style="font-family:Montserrat,sans-serif;'
     'font-size:clamp(0.38em,1vw,0.58em);text-transform:uppercase;'
     'letter-spacing:1px;color:#fff;margin-top:4px">Clients</div>'
     '</div>'
-    
+
     '</div>'  # end stats
     '</div>'  # end hero outer
 )
