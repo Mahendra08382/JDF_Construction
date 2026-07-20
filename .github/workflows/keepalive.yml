@@ -1,26 +1,31 @@
-name: Keep Streamlit Awake
+name: Dummy Commit
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # Every 15 minutes
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  ping:
+  commit:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Ping Streamlit
+      - uses: actions/checkout@v4
+
+      - name: Update timestamp
+        run: date > keepalive.txt
+
+      - name: Commit changes
         run: |
-          python - <<EOF
-          import requests
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          r = requests.get(
-              "https://jdf-construction.streamlit.app",
-              headers={"User-Agent": "Mozilla/5.0"},
-              timeout=30
+          git add keepalive.txt
+
+          git diff --cached --quiet || (
+            git commit -m "Keep alive $(date)"
+            git push
           )
-
-          print(r.status_code)
-          print(r.url)
-          EOF
