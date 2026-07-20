@@ -647,15 +647,13 @@ if pg == "Home":
     'flex-wrap:nowrap;min-height:280px">'
 
     # LEFT logo — rotates
-    '<div class="anim-logo" style="background:#f2f0eb;'
-    'border-radius:12px;padding:10px;'
-    'border:2px solid rgba(201,162,39,0.4);'
-    'box-shadow:0 4px 20px rgba(0,0,0,0.4);'
+    '<div style="width:clamp(60px,15vw,180px);min-width:clamp(60px,15vw,180px);'
     'display:flex;align-items:center;justify-content:center;'
-    'margin:0 auto;'
-    'text-align:center">'
+    'padding:clamp(8px,2vw,24px);'
+    'border-right:1px solid rgba(201,162,39,0.2)">'
+    '<div class="anim-logo">'
     + logo_tag +
-    '</div>'
+    '</div></div>'
 
     # CENTER — no animations, stays still
     '<div style="flex:1;min-width:0;display:flex;align-items:center;'
