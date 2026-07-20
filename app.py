@@ -509,11 +509,18 @@ div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {
     50%      { color:#f5d77e; text-shadow:0 0 15px rgba(201,162,39,0.8); }
 }
 
+.anim-logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+}
 .anim-logo img {
-    width: clamp(100px,14vw,190px) !important;
+    width: clamp(80px,12vw,160px) !important;
     animation: logoRotate 5s ease-in-out infinite;
     transform-origin: center;
     display: block;
+    margin: 0 auto;
 }
 .anim-stat-1 { animation: achievementFloat 3s ease-in-out infinite 0.0s; }
 .anim-stat-2 { animation: achievementFloat 3s ease-in-out infinite 0.3s; }
@@ -640,13 +647,15 @@ if pg == "Home":
     'flex-wrap:nowrap;min-height:280px">'
 
     # LEFT logo — rotates
-    '<div style="width:clamp(60px,15vw,180px);min-width:clamp(60px,15vw,180px);'
+    '<div class="anim-logo" style="background:#f2f0eb;'
+    'border-radius:12px;padding:10px;'
+    'border:2px solid rgba(201,162,39,0.4);'
+    'box-shadow:0 4px 20px rgba(0,0,0,0.4);'
     'display:flex;align-items:center;justify-content:center;'
-    'padding:clamp(8px,2vw,24px);'
-    'border-right:1px solid rgba(201,162,39,0.2)">'
-    '<div class="anim-logo">'
+    'margin:0 auto;'
+    'text-align:center">'
     + logo_tag +
-    '</div></div>'
+    '</div>'
 
     # CENTER — no animations, stays still
     '<div style="flex:1;min-width:0;display:flex;align-items:center;'
